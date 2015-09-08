@@ -1,0 +1,2 @@
+module MemberAccesHelper
+end

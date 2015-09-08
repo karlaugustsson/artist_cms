@@ -1,0 +1,9 @@
+<% @page_title = "edit artist" %>
+<%= error_messages_for(@artist) %>
+
+
+<%= form_for(@artist) do |f| %>
+
+	<%= render(:partial => "artists/form" , :locals => {:f => f}) %>
+	<%= submit_tag("update artist") %>
+<% end %>

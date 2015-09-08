@@ -1,0 +1,8 @@
+<% @page_title = "Delete artist" %>
+
+<%= form_for(:artist, :url => artist_path(@artist) , :html => {:method => :delete})  do |f| %>
+
+<p>you are about to delete your account:<%= @artist.email%></p>
+
+<%= submit_tag("delete artist") %>
+<% end %>	
