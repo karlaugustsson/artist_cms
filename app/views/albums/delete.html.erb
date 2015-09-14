@@ -1,0 +1,8 @@
+<% @page_title = "Delete album" %>
+<%= link_to("back to index" , artist_music_group_albums_path(@artist,@group,@album))%>
+<%= form_for(:album, :url => artist_music_group_album_path(@artist,@group,@album) , :html => {:method => :delete,multipart: true })  do |f| %>
+
+<p>you are about to delete album:<%= @album.name%></p>
+
+<%= submit_tag("delete music album") %>
+<% end %>	

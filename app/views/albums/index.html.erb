@@ -1,0 +1,13 @@
+<% @page_title = "all my albums" %>
+
+<%= link_to("new music group album" , new_artist_music_group_album_path(@artist,@group))%>
+	<%=link_to("back to group" , artist_music_group_path(@artist,@group))%>
+<%@album.each do |album|%>
+	
+	<div>
+	<h2><%= album.name%></h2>
+	<%=link_to("show album" , artist_music_group_album_path(@artist,@group,album))%>
+	<%=link_to("edit album" , edit_artist_music_group_album_path(@artist,@group,album))%>
+	<%=link_to("delete album" , artist_music_group_album_path(@artist,@group,album) , :method => 'delete')%>
+	</div>
+<% end %>

@@ -1,4 +1,5 @@
 class Artist < ActiveRecord::Base
+	has_many :music_groups
 	has_secure_password
 
 
@@ -16,5 +17,6 @@ class Artist < ActiveRecord::Base
 
 	validates_format_of(:email , :with => EMAIL_REGEX)
 	validates_uniqueness_of :email
+	validates_length_of(:password , { in: 3..40 })
 
 end

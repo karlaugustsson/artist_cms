@@ -1,0 +1,9 @@
+<% @page_title = "My album" %>
+<%= link_to("back to albums" , artist_music_group_albums_path(@artist,@group))%>
+<%=image_tag(@album.album_art,size:'100')%>
+
+	<%= link_to("edit album" , edit_artist_music_group_album_path(@artist,@group,@album))%>
+
+	<%= link_to("delete album" , delete_artist_music_group_album_path(@artist,@group,@album))%>
+	
+

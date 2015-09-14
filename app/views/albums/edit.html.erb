@@ -1,0 +1,10 @@
+<% @page_title = "New music group album" %>
+<%= link_to("back to index" , artist_music_group_albums_path(@artist,@group))%>
+<%= error_messages_for(@album) %>
+
+
+<%= form_for([@artist,@group,@album], :html => { multipart: true }) do |f| %>
+
+	<%= render(:partial => "albums/form" , :locals => {:f => f}) %>
+	<%= submit_tag("edit current album") %>
+<% end %>

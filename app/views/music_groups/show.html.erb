@@ -1,0 +1,11 @@
+<% @page_title = "My Group" %>
+<%= link_to("back to index" , artist_music_groups_path(@artist))%>
+<h2><%= @group.name %></h2>
+	<%= link_to("edit my music group" , edit_artist_music_group_path(@artist,@group))%>
+
+	<%= link_to("delete my music group" , delete_artist_music_group_path(@artist,@group))%>
+
+	<%= link_to("show albums" , artist_music_group_albums_path(@artist,@group))%>
+	
+
+

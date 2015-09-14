@@ -1,26 +1,33 @@
 Rails.application.routes.draw do
 
-  get 'artists/new'
-
-  get 'artists/create'
-
-  get 'artists/index'
-
-  get 'artists/show'
-
-  get 'artists/edit'
-
-  get 'artists/update'
-
-  get 'artists/delete'
-
-  get 'artists/destroy'
-
   resources :artists do 
     member do
      get :delete
     end
+    resources :music_groups do
+    member do
+      get :delete
+    end
+        resources :albums do
+    member do
+      get :delete
+    end
+    
+    end
+
+    end
   end  
+
+    resources :music_companies do 
+    member do
+     get :delete
+    end
+  resources :labels do
+    member do
+      get :delete
+    end
+  end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

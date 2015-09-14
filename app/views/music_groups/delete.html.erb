@@ -1,0 +1,8 @@
+<% @page_title = "Delete music label" %>
+<%= link_to("back to index" , music_company_labels_path(@company,@label))%>
+<%= form_for(:label, :url => music_company_label_path(@company,@label) , :html => {:method => :delete})  do |f| %>
+
+<p>you are about to delete your this label:<%= @label.name%></p>
+
+<%= submit_tag("delete music label") %>
+<% end %>	

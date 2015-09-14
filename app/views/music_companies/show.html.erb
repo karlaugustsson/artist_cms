@@ -1,0 +1,8 @@
+<% @page_title = "My music company page" %>
+<%= link_to("back to music comapnies accounts" , music_companies_path())%>
+	<%= link_to("edit my account" , edit_music_company_path(@company))%>
+
+	<%= link_to("delete my account" , delete_music_company_path(@company))%>
+	
+	<%= link_to("show all my music labels" , music_company_labels_path(@company))%>
+

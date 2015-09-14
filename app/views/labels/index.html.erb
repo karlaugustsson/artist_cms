@@ -1,0 +1,13 @@
+<% @page_title = "all my groups" %>
+
+<%= link_to("new music group" , new_artist_music_group_path(@artist))%>
+
+<%@group.each do |group|%>
+	
+	<div>
+	<h2><%= group.name%></h2>
+	<%=link_to("show group" , artist_music_group_path(@artist,group))%>
+	<%=link_to("edit group" , edit_artist_music_group_path(@artist,group))%>
+	<%=button_to("delete group" , artist_music_group_path(@artist,group) , :method => 'delete')%>
+	</div>
+<% end %>

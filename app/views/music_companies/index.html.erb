@@ -1,0 +1,13 @@
+<% @page_title = "all musiccompanies accounts" %>
+
+<%= link_to("new account" , new_music_company_path())%>
+
+<% @companies.each do |company|%>
+	
+	<div>
+	<h2><%= company.email%></h2>
+	<%=link_to("show account" , music_company_path(id: company.id))%>
+	<%=link_to("edit account" , edit_music_company_path(company))%>
+	<%=button_to("delete account" ,  music_company_path( id: company.id) , :method => 'delete')%>
+	</div>
+<% end %>

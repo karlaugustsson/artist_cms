@@ -6,8 +6,8 @@
 	
 	<div>
 	<h2><%= artist.email%></h2>
-	<%=link_to("show account" , artists_show_path(id: artist.id))%>
+	<%=link_to("show account" , artist_path(id: artist.id))%>
 	<%=link_to("edit account" , edit_artist_path(artist))%>
-	<%=link_to("delete account" , artists_destroy_path( id: artist.id))%>
+	<%=link_to("delete account" , artist_path( id: artist.id) , :method => 'delete')%>
 	</div>
 <% end %>
