@@ -1,8 +1,8 @@
-<% @page_title = "Delete group" %>
-<%= link_to("back to index" , artist_music_groups_path(@artist))%>
-<%= form_for(:music_group, :url => artist_music_group_path(@artist,@group) , :html => {:method => :delete})  do |f| %>
+<% @page_title = "Delete music label" %>
+<%= link_to("back to index" , music_company_labels_path(@company,@label))%>
+<%= form_for(:label, :url => music_company_label_path(@company,@label) , :html => {:method => :delete})  do |f| %>
 
-<p>you are about to delete your account:<%= @group.name%></p>
+<p>you are about to delete your this label:<%= @label.label_name%></p>
 
-<%= submit_tag("delete music group") %>
+<%= submit_tag("delete music label") %>
 <% end %>	

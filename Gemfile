@@ -47,5 +47,12 @@ group :development, :test do
   gem 'rmagick' , '~> 2.15.4'
 
   gem 'date_validator'
+
+  gem "paperclip", "~> 4.3"
+
+  gem 'acts_as_list'
+
+  gem 'ruby-mp3info', :require => 'mp3info'
 end
+
 

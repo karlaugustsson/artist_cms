@@ -1,0 +1,10 @@
+<% @page_title = "edit music album track " %>
+<%= link_to("back to album" , artist_music_group_album_path(@artist,@group,@album))%>
+<%= error_messages_for(@album) %>
+
+
+<%= form_for([@artist,@group,@album,@track], :html => { multipart: true }) do |f| %>
+
+	<%= render(:partial => "album_tracks/form" , :locals => {:f => f}) %>
+	<%= submit_tag("edit current album track") %>
+<% end %>

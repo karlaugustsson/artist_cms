@@ -1,10 +1,10 @@
-<% @page_title = "New music_group" %>
-<%= link_to("back to index" , artist_music_groups_path(@artist))%>
-<%= error_messages_for(@group) %>
+<% @page_title = "New music label" %>
+<%= link_to("back to index" , music_company_labels_path(@company))%>
+<%= error_messages_for(@label) %>
 
 
-<%= form_for([@artist,@group]) do |f| %>
+<%= form_for([@company,@label]) do |f| %>
 
-	<%= render(:partial => "music_groups/form" , :locals => {:f => f}) %>
-	<%= submit_tag("Create music Group") %>
+	<%= render(:partial => "labels/form" , :locals => {:f => f}) %>
+	<%= submit_tag("Create music label") %>
 <% end %>

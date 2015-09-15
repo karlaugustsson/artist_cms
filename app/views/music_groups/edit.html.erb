@@ -1,9 +1,9 @@
-<% @page_title = "edit music label" %>
-<%= error_messages_for(@label) %>
+<% @page_title = "edit music group" %>
+<%= error_messages_for(@group) %>
 
 
-<%= form_for([@comapny,@label]) do |f| %>
+<%= form_for([@artist,@group]) do |f| %>
 
-	<%= render(:partial => "labels/form" , :locals => {:f => f}) %>
-	<%= submit_tag("update music label") %>
+	<%= render(:partial => "music_groups/form" , :locals => {:f => f}) %>
+	<%= submit_tag("update music group") %>
 <% end %>

@@ -7,7 +7,9 @@ class AlbumsController < ApplicationController
 
   def create
     @album = Album.new(album_params)
+
     if @album.save
+      @group.albums << @album
       message('You succesfully created a new album')
       redirect_to([@artist,@group,@album])
     else
@@ -16,7 +18,7 @@ class AlbumsController < ApplicationController
   end
 
   def index
-    @album = Album.all
+    @album = @group.albums
   end
 
   def show
@@ -57,6 +59,6 @@ class AlbumsController < ApplicationController
     @group = MusicGroup.find(params[:music_group_id])
   end
   def album_params
-    params.require(:album).permit(:name,:release_date,:album_art,:published)
+    params.require(:album).permit(:name,:release_date,:album_art,:published,:collaborating_artists)
   end
 end

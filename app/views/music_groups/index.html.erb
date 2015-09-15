@@ -1,13 +1,13 @@
-<% @page_title = "all my labels" %>
+<% @page_title = "all my groups" %>
 
-<%= link_to("new music label" , new_music_company_label_path(@company))%>
-
-<%@label.each do |label|%>
+<%= link_to("new music group" , new_artist_music_group_path(@artist))%>
+<%= link_to("back to artist accounts " , artists_path(@artist))%>
+<%@group.each do |group|%>
 	
 	<div>
-	<h2><%= label.name%></h2>
-	<%=link_to("show label" , music_company_label_path(@company,@label))%>
-	<%=link_to("edit label" , edit_music_company_label_path(@company,@label))%>
-	<%=button_to("delete label" , music_company_label_path(@company,@label) , :method => 'delete')%>
+	<h2><%= group.name%></h2>
+	<%=link_to("show group" , artist_music_group_path(@artist,group))%>
+	<%=link_to("edit group" , edit_artist_music_group_path(@artist,group))%>
+	<%=button_to("delete group" , artist_music_group_path(@artist,group) , :method => 'delete')%>
 	</div>
 <% end %>

@@ -1,6 +1,6 @@
 class LabelsController < ApplicationController
   layout 'standard'
-  before_action :def_music_comapny
+  before_action :music_company
   def new
     @label = Label.new
   end
@@ -10,7 +10,7 @@ class LabelsController < ApplicationController
     
     if @label.save
       message("you succesfully created a lebel")
-      redirect_to(@company,@label)
+      redirect_to([@company,@label])
     else
       render('new')
     end
@@ -27,8 +27,7 @@ class LabelsController < ApplicationController
 
   def edit
     @label = Label.find(params[:id])
-    
-
+  
   end
 
   def update
@@ -36,7 +35,7 @@ class LabelsController < ApplicationController
 
     if @label.update_attributes(label_params)
       message("you succesfully updated a lebel")
-    redirect_to(@company,@label)
+    redirect_to([@company,@label])
     else
     render('edit')
     end
@@ -50,16 +49,16 @@ class LabelsController < ApplicationController
   def destroy
     @label = Label.find(params[:id]).destroy
     message("you succesfully deleted a label")
-    redirect_to(labels_path)
+    redirect_to(music_company_labels_path(@company))
   end
 
   private
   
   def label_params
-  params.require(:label).permit(:name)
+  params.require(:label).permit(:label_name)
   end
-def music_comapny
-  @company = MusicCompany.find(params[:id]).
+def music_company
+  @company = MusicCompany.find(params[:music_company_id])
 end
 
 end

@@ -1,22 +1,44 @@
 Rails.application.routes.draw do
 
+  get 'album_tracks/new'
+
+  get 'album_tracks/create'
+
+  get 'album_tracks/index'
+
+  get 'album_tracks/show'
+
+  get 'album_tracks/edit'
+
+  get 'album_tracks/update'
+
+  get 'album_tracks/delete'
+
+  get 'album_tracks/destroy'
+
   resources :artists do 
     member do
      get :delete
     end
-    resources :music_groups do
-    member do
-      get :delete
-    end
-        resources :albums do
-    member do
-      get :delete
-    end
+      resources :music_groups do
+      member do
+        get :delete
+      end
+            resources :albums do
+        member do
+          get :delete
+        end
+          resources :album_tracks do
+          member do
+            get :delete
+          end
     
-    end
+           end
+       end
 
     end
-  end  
+
+end  
 
     resources :music_companies do 
     member do
