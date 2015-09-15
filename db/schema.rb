@@ -76,6 +76,12 @@ ActiveRecord::Schema.define(version: 20150914131851) do
 
   add_index "labels", ["music_company_id"], name: "index_labels_on_music_company_id", using: :btree
 
+  create_table "labels_music_companies", id: false, force: :cascade do |t|
+    t.integer "label_id",                                limit: 4
+    t.integer "music_company_id",                        limit: 4
+    t.integer "[\"label_id\", \"music_company_id\"]_id", limit: 4
+  end
+
   create_table "music_companies", force: :cascade do |t|
     t.string   "email",           limit: 200, null: false
     t.string   "password_digest", limit: 255
