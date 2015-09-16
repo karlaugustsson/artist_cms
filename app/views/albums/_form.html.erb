@@ -18,12 +18,11 @@
 
 <%= f.check_box(:published) %>
 
-<%= f.label(:labels) %>
 
-  <% for label in @labels %>
-
-      <%=f.check_box(:labels,{ :multiple => true }, label.id, nil)  %>
-      <%= label.label_name %>
+  <% for label in @label_ids %>
+		 <%= f.label("#{:label_ids}_#{label.id}",label.label_name) %>
+      <%=f.check_box(:label_ids,{ :multiple => true }, label.id, nil)  %>
+     
 
   <% end %>
 

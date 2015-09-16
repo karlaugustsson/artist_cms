@@ -5,6 +5,6 @@
 
 <%= form_for([@artist,@group,@album]) do |f| %>
 
-	<%= render(:partial => "albums/form" , :locals => {:f => f , :labels => @label}) %>
+	<%= render(:partial => "albums/form" , :locals => {:f => f , :label_ids => @label_ids}) %>
 	<%= submit_tag("Create new album") %>
 <% end %>

@@ -14,7 +14,7 @@ class Album < ActiveRecord::Base
           date: { after: Proc.new { Time.now - 120.year},
                   before: Proc.new { Time.now + 1.year } }
     # validate :collaborating_artists, :find_artists
-
+    validates_presence_of(:label_ids)
   after_destroy :remove_album_art_directory
 def remove_album_art_directory
 

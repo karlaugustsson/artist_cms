@@ -4,22 +4,19 @@ class AlbumsController < ApplicationController
     before_action :get_music_company_labels_or_deny_action , :only =>[:create,:new,:update,:edit]
   def new
     @album = Album.new
-    @labels = Label.all
+    @label_ids = Label.all
 
   end
 
   def create
     @album = Album.new(album_params)
-    @labels = Label.find(params[:album][:labels])
-    @labels.each do |label|
-      label.albums << @album
-    end
     if @album.save
 
       message('You succesfully created a new album')
       redirect_to([@artist,@group,@album])
     message("#{params[:album]}")
   else
+    @label_ids = Label.all
     render('new')
     end
   end
@@ -33,6 +30,7 @@ class AlbumsController < ApplicationController
   end
 
   def edit
+    @label_ids = Label.all
     @album= Album.find(params[:id])
   end
 
@@ -67,9 +65,8 @@ class AlbumsController < ApplicationController
     @group = MusicGroup.find(params[:music_group_id])
   end
   def album_params
-    params.require(:album).permit(:name,:release_date,:album_art,:published,:collaborating_artists,:labels)
+    params.require(:album).permit(:name,:release_date,:album_art,:published,:collaborating_artists,{:label_ids => []})
   end
-
   def get_music_company_labels_or_deny_action
     @labels = Label.all
     @album = @group.albums
