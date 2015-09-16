@@ -1,20 +1,26 @@
 class AlbumsController < ApplicationController
+      layout  'standard'
     before_action :get_current_artist_and_group
     before_action :get_music_company_labels_or_deny_action , :only =>[:create,:new,:update,:edit]
   def new
     @album = Album.new
-    @label = Label.all
+    @labels = Label.all
 
   end
 
   def create
     @album = Album.new(album_params)
+    @labels = Label.find(params[:album][:labels])
+    @labels.each do |label|
+      label.albums << @album
+    end
     if @album.save
 
       message('You succesfully created a new album')
       redirect_to([@artist,@group,@album])
-    else
-      render('new')
+    message("#{params[:album]}")
+  else
+    render('new')
     end
   end
 
@@ -36,6 +42,7 @@ class AlbumsController < ApplicationController
       message('You succesfully updated an album')
       redirect_to([@artist,@group,@album])
     else
+
       render('edit')
     end
   end

@@ -1,6 +1,6 @@
 require 'file_size_validator'
 class Album < ActiveRecord::Base
-	belongs_to :labels
+	has_and_belongs_to_many :labels
 	has_and_belongs_to_many :music_group
 	has_many :album_tracks
 

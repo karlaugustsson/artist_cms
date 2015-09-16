@@ -20,6 +20,11 @@
 
 <%= f.label(:labels) %>
 
-<%= f.select(:labels, @label.map{|s| [s.label_name , s.id]}) %>
+  <% for label in @labels %>
+
+      <%=f.check_box(:labels,{ :multiple => true }, label.id, nil)  %>
+      <%= label.label_name %>
+
+  <% end %>
 
 
