@@ -16,5 +16,7 @@ class CreateAlbumTracks < ActiveRecord::Migration
   def down
     remove_attachment :album_tracks, :music_file
   	drop_table :album_tracks
+    FileUtils.remove_dir("#{Rails.root}/public/uploads/album", :force => true)
+    FileUtils.remove_dir("#{Rails.root}/public/uploads/tmp", :force => true)
   end
 end
