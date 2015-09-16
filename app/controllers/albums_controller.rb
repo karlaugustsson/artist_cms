@@ -1,15 +1,16 @@
 class AlbumsController < ApplicationController
     before_action :get_current_artist_and_group
+    before_action :get_music_company_labels_or_deny_action , :only =>[:create,:new,:update,:edit]
   def new
     @album = Album.new
+    @label = Label.all
 
   end
 
   def create
     @album = Album.new(album_params)
-
     if @album.save
-      @group.albums << @album
+
       message('You succesfully created a new album')
       redirect_to([@artist,@group,@album])
     else
@@ -59,6 +60,24 @@ class AlbumsController < ApplicationController
     @group = MusicGroup.find(params[:music_group_id])
   end
   def album_params
-    params.require(:album).permit(:name,:release_date,:album_art,:published,:collaborating_artists)
+    params.require(:album).permit(:name,:release_date,:album_art,:published,:collaborating_artists,:labels)
   end
+
+  def get_music_company_labels_or_deny_action
+    @labels = Label.all
+    @album = @group.albums
+    if !@labels.empty?
+
+    else
+      message("no lables was found action cannot be performed")
+      redirect_to([@artist,@group])
+
+    end
+  
+  end
+
+
+
+
+
 end

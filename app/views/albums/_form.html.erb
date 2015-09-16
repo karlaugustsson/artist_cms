@@ -18,5 +18,8 @@
 
 <%= f.check_box(:published) %>
 
+<%= f.label(:labels) %>
+
+<%= f.select(:labels, @label.map{|s| [s.label_name , s.id]}) %>
 
 
