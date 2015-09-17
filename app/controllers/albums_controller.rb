@@ -14,7 +14,6 @@ class AlbumsController < ApplicationController
 
       message('You succesfully created a new album')
       redirect_to([@artist,@group,@album])
-    message("#{params[:album]}")
   else
     @label_ids = Label.all
     render('new')
@@ -23,6 +22,7 @@ class AlbumsController < ApplicationController
 
   def index
     @album = @group.albums
+    @tracks = @album.album_tracks
   end
 
   def show

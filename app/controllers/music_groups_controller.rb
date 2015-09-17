@@ -6,7 +6,7 @@ class MusicGroupsController < ApplicationController
   end
 
   def create
-    @group = MusicGroup.new(group_params)
+    @group = @artist.music_groups.new(group_params)
     if @group.save
       @artist.music_groups << @group
       message('You succesfully created a musicact')
@@ -17,12 +17,12 @@ class MusicGroupsController < ApplicationController
   end
 
   def index
-    @group = MusicGroup.all
+    @group = @artist.music_groups.all
 
   end
 
   def show
-    @group = MusicGroup.find(params[:id])
+    @group = @artist.music_groups.find(params[:id])
   end
 
   def edit
@@ -58,6 +58,6 @@ class MusicGroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:music_group).permit(:name,:solo_work,:formation_date,:tag_name)
+    params.require(:music_group).permit(:name,:solo_work,:formation_date,:tag_name,:artist_id)
   end
 end

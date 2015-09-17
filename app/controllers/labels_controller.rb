@@ -2,14 +2,15 @@ class LabelsController < ApplicationController
   layout 'standard'
   before_action :music_company
   def new
-    @label = Label.new
+    @label = Label.new()
+
   end
 
   def create
-    @label= Label.new(label_params)
+    @label= MusicCompany.find(params[:music_company_id]).labels.new(label_params)
     
     if @label.save
-      message("you succesfully created a lebel")
+      message("you succesfully created a label#{params[:label]}")
       redirect_to([@company,@label])
     else
       render('new')
@@ -18,7 +19,7 @@ class LabelsController < ApplicationController
   end
 
   def index
-    @labels = Label.all
+    @labels = @company.labels
   end
 
   def show
@@ -34,7 +35,7 @@ class LabelsController < ApplicationController
     @label = Label.find(params[:id])
 
     if @label.update_attributes(label_params)
-      message("you succesfully updated a lebel")
+      message("you succesfully updated a label")
     redirect_to([@company,@label])
     else
     render('edit')
@@ -55,7 +56,7 @@ class LabelsController < ApplicationController
   private
   
   def label_params
-  params.require(:label).permit(:label_name)
+  params.require(:label).permit(:label_name,:music_company_id)
   end
 def music_company
   @company = MusicCompany.find(params[:music_company_id])

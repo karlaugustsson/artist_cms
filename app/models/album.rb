@@ -15,7 +15,9 @@ class Album < ActiveRecord::Base
                   before: Proc.new { Time.now + 1.year } }
     # validate :collaborating_artists, :find_artists
     validates_presence_of(:label_ids)
-  after_destroy :remove_album_art_directory
+    validates_presence_of(:name) 
+
+    after_destroy :remove_album_art_directory
 def remove_album_art_directory
 
     FileUtils.remove_dir("#{Rails.root}/public/uploads/album/album_art/#{id.to_s}", :force => true)
