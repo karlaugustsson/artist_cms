@@ -7,7 +7,7 @@ class AlbumTracksController < ApplicationController
   end
 
   def create
-    @track = AlbumTrack.new(track_params)
+    @track = @album.album_tracks.new(track_params)
     @track.album_id = @album.id
     if @track.save
       message("you succesfully created a a new track")
@@ -61,6 +61,6 @@ class AlbumTracksController < ApplicationController
     @album = Album.find(params[:album_id])
   end
   def track_params
-    params.require(:album_track).permit(:name,:position,:music_file)
+    params.require(:album_track).permit(:name,:position,:music_file,:album_id)
   end
 end

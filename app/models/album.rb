@@ -1,7 +1,7 @@
 require 'file_size_validator'
 class Album < ActiveRecord::Base
 	has_and_belongs_to_many :labels
-	has_and_belongs_to_many :music_group
+	has_and_belongs_to_many :music_groups
 	has_many :album_tracks
 
 	attr_accessor :album_art_cache 

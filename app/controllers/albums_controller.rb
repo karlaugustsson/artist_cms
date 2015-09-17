@@ -3,7 +3,7 @@ class AlbumsController < ApplicationController
     before_action :get_current_artist_and_group
     before_action :get_music_company_labels_or_deny_action , :only =>[:create,:new,:update,:edit]
   def new
-    @album = Album.new
+    @album =  Album.new
     @label_ids = Label.all
 
   end
@@ -11,8 +11,8 @@ class AlbumsController < ApplicationController
   def create
     @album = Album.new(album_params)
     if @album.save
-
-      message('You succesfully created a new album')
+      @album.music_groups << @group
+      message("You succesfully created a new album")
       redirect_to([@artist,@group,@album])
   else
     @label_ids = Label.all
@@ -22,11 +22,12 @@ class AlbumsController < ApplicationController
 
   def index
     @album = @group.albums
-    @tracks = @album.album_tracks
+
   end
 
   def show
     @album= Album.find(params[:id])
+    @tracks = @album.album_tracks
   end
 
   def edit
@@ -65,7 +66,7 @@ class AlbumsController < ApplicationController
     @group = MusicGroup.find(params[:music_group_id])
   end
   def album_params
-    params.require(:album).permit(:name,:release_date,:album_art,:published,:collaborating_artists,{:label_ids => []})
+    params.require(:album).permit(:name,:release_date,:album_art,:album_art_cache,:published,:music_group_id,{:label_ids => []})
   end
   def get_music_company_labels_or_deny_action
     @labels = Label.all

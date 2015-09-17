@@ -58,6 +58,6 @@ class MusicGroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:music_group).permit(:name,:solo_work,:formation_date,:tag_name,:artist_id)
+    params.require(:music_group).permit(:name,:solo_work,:formation_date,:tag_name,:artist_id,:album_id)
   end
 end

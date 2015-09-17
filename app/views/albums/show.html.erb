@@ -7,13 +7,17 @@
 
 	<%= link_to("delete album" , delete_artist_music_group_album_path(@artist,@group,@album))%>
 	
-
-	<%=image_tag(@album.album_art,size:'100')%>
-	<% @tracks.each do |track| %>
-
 	<div>
-			<%link_to(track.name , show_artist_music_group_album_album_track_path(track))%>
+	<%=image_tag(@album.album_art,size:'100')%>
+	<h2><%=@album.name%></h2>
+	<% @tracks.each do |track| %>
+	<div>
+
+	<%= track.position %>
+			<%=  link_to(track.name , artist_music_group_album_album_track_path(@artist,@group,@album,track))%>
 
 	</div>
 
+
 <% end %>
+</div>
