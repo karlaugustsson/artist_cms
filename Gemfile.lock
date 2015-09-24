@@ -170,7 +170,7 @@ DEPENDENCIES
   date_validator
   jbuilder (~> 2.0)
   jquery-rails
-  mysql2
+  mysql2 (~> 0.3.18)
   paperclip (~> 4.3)
   rails (= 4.2.3)
   rmagick (~> 2.15.4)

@@ -6,6 +6,10 @@ class Album < ActiveRecord::Base
 
 	attr_accessor :album_art_cache 
 	mount_uploader :album_art, AlbumArtUploader
+
+  scope :search , lambda { |search| where("name LIKE ?", "%#{search}%") }
+
+  
 	validates :album_art, 
     :file_size => { 
       :maximum => 0.5.megabytes.to_i 

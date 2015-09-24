@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
 
-  get 'album_tracks/new'
+namespace :api,:path => "", :defaults => {:subdomain => 'api',:format => :json , :content_type => "application/json"} do
+  namespace :v1 do
+    resources :music_groups do 
+      resources :albums do 
+        resources :album_tracks
+      end
+      
+    
 
-  get 'album_tracks/create'
-
-  get 'album_tracks/index'
-
-  get 'album_tracks/show'
-
-  get 'album_tracks/edit'
-
-  get 'album_tracks/update'
-
-  get 'album_tracks/delete'
-
-  get 'album_tracks/destroy'
+    end
+    resources :search_album_tracks
+    resources :search_albums
+    resources :search_music_groups
+  end
+end
 
   resources :artists do 
     member do
