@@ -5,7 +5,7 @@ class API::V1::SearchAlbumsController < ApplicationController
     @tracks = []
     @album.each do |album|
     	album.album_tracks.each do |t|
-    		t.music_file_file_name = t.music_file.url
+    		t.music_file_file_name =  "http://localhost:3000" + t.music_file.url
     	end
     @tracks += album.album_tracks
    	
