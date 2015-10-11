@@ -4,7 +4,9 @@ class Album < ActiveRecord::Base
 	has_and_belongs_to_many :music_groups
 	has_many :album_tracks
 
-	attr_accessor :album_art_cache 
+	attr_accessor :album_art_cache , :full_path_album_art
+
+ 
 	mount_uploader :album_art, AlbumArtUploader
 
   scope :search , lambda { |search| where("name LIKE ?", "%#{search}%") }
@@ -25,7 +27,7 @@ class Album < ActiveRecord::Base
 def remove_album_art_directory
 
     FileUtils.remove_dir("#{Rails.root}/public/uploads/album/album_art/#{id.to_s}", :force => true)
-  end
+end
 
   # def find_artists
   #   if collaborating_artists.blank?

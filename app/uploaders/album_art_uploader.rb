@@ -10,7 +10,6 @@ def cache!(new_file)
   def delete_old_tmp_file(dummy)
     @old_tmp_file.try :delete
   end
-
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
