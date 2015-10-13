@@ -2,7 +2,13 @@ require 'paperclip'
 class API::V1::SearchAlbumsController < ApplicationController
 
   def index
-    @album = Album.search(params[:search])
+    if params[:id]
+      @album = Album.where(:id => params[:id])
+      puts @album.length
+    else
+        @album = Album.search(params[:search])
+    end
+    
     @tracks = []
     @album.each do |album|
  
