@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
 
  	render :json => tracks ,:only => [:name ,:track_length, :music_file_file_name, :music_file_content_type], :include =>
  		{:album =>
- 			{:only => [:id,:name],:include =>
- 		 		{:music_groups =>
+ 			{:only => [:id,:name,:release_date],:include =>
+ 		 		{:labels => {},:music_groups =>
  		 			{:only => [:id,:name]
 
  		 			}
