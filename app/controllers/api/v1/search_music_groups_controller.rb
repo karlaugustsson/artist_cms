@@ -1,7 +1,11 @@
 class API::V1::SearchMusicGroupsController < ApplicationController
 
   def index
+    if params[:id]
+    @group = MusicGroup.where(:id => params[:id])
+  else
     @group = MusicGroup.search(params[:search])
+  end
     @tracks = []
     @group.each do |group|
     	group.albums.each do |album|

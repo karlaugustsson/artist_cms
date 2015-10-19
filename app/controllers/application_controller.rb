@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     end 
     def render_search_result_to_json(tracks)
 
- 	render :json => tracks ,:only => [:name ,:track_length, :music_file_file_name, :music_file_content_type], :include =>
+ 	render :json => tracks ,:only => [:position,:name ,:track_length, :music_file_file_name, :music_file_content_type], :include =>
  		{:album =>
  			{:only => [:id,:name,:release_date],:include =>
  		 		{:labels => {},:music_groups =>
@@ -22,3 +22,5 @@ class ApplicationController < ActionController::Base
 
     end
 end
+
+

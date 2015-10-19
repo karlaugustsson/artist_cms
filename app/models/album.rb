@@ -10,7 +10,7 @@ class Album < ActiveRecord::Base
 	mount_uploader :album_art, AlbumArtUploader
 
   scope :search , lambda { |search| where("name LIKE ?", "%#{search}%") }
-
+  scope :release_date_asc , lambda { order("albums.release_date ASC") }
   
 	validates :album_art, 
     :file_size => { 
@@ -27,6 +27,10 @@ class Album < ActiveRecord::Base
 def remove_album_art_directory
 
     FileUtils.remove_dir("#{Rails.root}/public/uploads/album/album_art/#{id.to_s}", :force => true)
+end
+
+def order_by_release_date
+ return Album.release_date_asc
 end
 
   # def find_artists
