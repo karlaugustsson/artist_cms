@@ -1,10 +1,11 @@
 <% @page_title = "New music group album" %>
-<%= link_to("back to index" , artist_music_group_albums_path(@artist,@group))%>
+<%= link_to("back to index" , artist_music_group_albums_path(@artist,@owner))%>
 <%= error_messages_for(@album) %>
 
+<br>
+<br>
+<%= form_for([@artist,@owner,@album]) do |f| %>
 
-<%= form_for([@artist,@group,@album]) do |f| %>
-
-	<%= render(:partial => "albums/form" , :locals => {:f => f , :label_ids => @label_ids}) %>
-	<%= submit_tag("Create new album") %>
+	<%= render(:partial => "albums/form" , :locals => {:f => f , :label_ids => @labels}) %>
+	<%= submit_tag("Create new album" , :class => "btn btn-primary") %>
 <% end %>

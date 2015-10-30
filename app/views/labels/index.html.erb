@@ -1,13 +1,24 @@
 <% @page_title = "all my labels" %>
-
+<% if @onlineMusicCompany.id == @company.id %>
 <%= link_to("new music label" , new_music_company_label_path(@company))%>
-
-<%@labels.each do |label|%>
-	
-	<div>
-	<h2><%= label.label_name%></h2>
-	<%=link_to("show label" , music_company_label_path(@company,label))%>
-	<%=link_to("edit label" , edit_music_company_label_path(@company,label))%>
-	<%=button_to("delete label" , music_company_label_path(@company,label) , :method => 'delete')%>
-	</div>
+<% elsif @onlineMusicCompany.super_power == 1 %>
+<%= link_to("back to view all music company account" , music_companies_path())%>
 <% end %>
+<table class="table zebra-striped table-condensed table-hover">
+	<th>Name</th>
+	<th>owner</th>
+	<th>number of albums</th>
+
+<% if @labels.count == 0%>
+	<tr><td><p>No labels were found</p></td></tr>
+<%end%>
+<%@labels.each do |label|%>
+	<tr>
+	<td><%= link_to(label.label_name,music_company_label_path(@company,label))%></td>
+	<td><%=link_to(@company.email, music_company_path(@company))%></td>
+	<td><%= link_to(label.albums.count,music_company_label_albums_path(@company,label))%></td>
+
+
+	</tr>
+<% end %>
+</table>

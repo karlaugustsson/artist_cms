@@ -1,0 +1,12 @@
+var activatedbutton = document.getElementById("activate "+ "<%= j @company.id.to_s %>")
+var activated = <%= @company.activated.to_int %> == 1 ?  true : false
+var activatedfield = activatedbutton.previousElementSibling
+activatedfield.value = activated == 1 ? 0 : 1
+activatedbutton.className = "box " + activated
+
+var superbutton = document.getElementById("super-power "+ "<%= j @company.id.to_s %>")
+
+var power = <%= @company.super_power.to_int %> == 1 ?  true : false
+var superfield = superbutton.previousElementSibling
+superfield.value = power == 1 ? 0 : 1
+superbutton.className = "box " + power

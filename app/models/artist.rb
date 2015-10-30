@@ -1,5 +1,6 @@
 class Artist < ActiveRecord::Base
 	has_many :music_groups
+	has_one :activation_code , :class_name => "ArtistActivationCode"
 	has_secure_password
 
 

@@ -1,11 +1,26 @@
 <% @page_title = "My Group" %>
-<%= link_to("back to index" , artist_music_groups_path(@artist))%>
-<h2><%= @group.name %></h2>
-	<%= link_to("edit my music group" , edit_artist_music_group_path(@artist,@group))%>
+<%= link_to("back to all music groups" , artist_music_groups_path(@artist))%>
+<table  class="table zebra-striped table-condensed table-hover">
+	<th>Name</th>
+	<th>Number of albums</th>
+	<th>Formation date</th>
+	<th>Actions</th>
+	<tr>
 
-	<%= link_to("delete my music group" , delete_artist_music_group_path(@artist,@group))%>
+		<td><p><%= @group.name %></p></td>
+		<td><%= link_to(pluralize(@group.albums.count, 'album') , artist_music_group_albums_path(@artist,@group))%></td>
+		<td><p><%=@group.formation_date.strftime("%F")  %></p></td>
+		<td>
+				<%= link_to("edit my music group" , edit_artist_music_group_path(@artist,@group),:class => "btn-xs btn-primary")%>
 
-	<%= link_to("show albums" , artist_music_group_albums_path(@artist,@group))%>
+
+	<%= link_to("delete my music group" , delete_artist_music_group_path(@artist,@group),:class => "btn-xs btn-danger")%>
+
+		</td>
+
+
 	
+</tr>
+</table>
 
 

@@ -3,8 +3,8 @@ class CreateMusicCompanies < ActiveRecord::Migration
     create_table :music_companies do |t|
     t.string :email , :limit => 200 , :null => false
 	  t.string :password_digest
-      t.timestamps null: false
-      t.integer :super_power
+    t.timestamps null: false
+    t.integer :super_power ,:default => 0
     end
   end
 

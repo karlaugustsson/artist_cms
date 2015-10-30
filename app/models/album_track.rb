@@ -5,6 +5,7 @@ class AlbumTrack < ActiveRecord::Base
 	has_and_belongs_to_many :featured_artists , :class_name => "MusicGroup"
 	
 	scope :search , lambda { |search| where("name LIKE ?", "%#{search}%") }
+	scope :position_asc , lambda{ order("album_tracks.position ASC")}
 
 	has_attached_file :music_file
 	validates_presence_of :name  

@@ -1,9 +1,11 @@
 <% if object && object.errors.size > 0 %>
 
-	<div id="errorexplonation">
-		<h2><%= pluralize(object.errors.size , "error")%></h2>
+	<div class="alert alert-danger" role="alert">
+		 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ 		 <span class="sr-only">Error:</span>
+		<%= pluralize(object.errors.size , "Error")%>
 
-		<p>These errors prohibited this record from being saved </p>
+		These errors prohibited this record from being saved
 
 		<ul>
 		

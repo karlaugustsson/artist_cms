@@ -5,5 +5,5 @@
 <%= form_for(@artist) do |f| %>
 
 	<%= render(:partial => "artists/form" , :locals => {:f => f}) %>
-	<%= submit_tag("Create Artist") %>
+	<%= submit_tag("Create Artist" , :class => "btn btn-primary" ) %>
 <% end %>

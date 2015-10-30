@@ -1,4 +1,8 @@
 class ArtistsController < ApplicationController
+  before_action :redirect_if_not_logged_in_artist , :except => [:new,:create]
+  before_action :redirect_if_logged_in , :only => [:new]
+  before_action :set_logged_in_artist , :except => [:new , :create]
+  before_action :remove_logged_in_music_company
   layout "standard"
   def new
     @artist = Artist.new
@@ -6,16 +10,18 @@ class ArtistsController < ApplicationController
 
   def create
     @artist = Artist.new(artist_params)
+    @code = ArtistActivationCode.new()
+    @code.code = new_artist_activation_code()
+     @code.save
+     @artist.activation_code = @code
     if @artist.save
-      message('You succesfully created an artist')
-      redirect_to(@artist)
+        ArtistMailer.register_artist_email(@artist,@code.code , request.host_with_port).deliver_later
+      
+      message('You succesfully created an artist account check email for activation',"succes")
+      redirect_to("/")
     else
       render('new')
     end
-  end
-
-  def index
-  @artists = Artist.all
   end
 
   def show
@@ -29,7 +35,7 @@ class ArtistsController < ApplicationController
   def update
   @artist = Artist.find(params[:id])
   if @artist.update_attributes(artist_params)
-    message('You succesfully updated an artist')
+    message('You succesfully updated an artist',"success")
       redirect_to(@artist)
   else
     render('edit')
@@ -41,14 +47,47 @@ class ArtistsController < ApplicationController
   end
 
   def destroy
-  @artist = Artist.find(params[:id]).destroy
-  @artist.destroy
-  message('You succesfully deleted an artist')
-  redirect_to(artists_path)
-  end
+
+    @artist = Artist.find(params[:id])
+
+    if @artist.activation_code == nil
+      @code = ArtistActivationCode.new()
+      @code.code = new_artist_activation_code()
+      @code.artist_id = @artist.id
+      @code.save
+      @artist.activation_code = @code
+
+    else
+    
+    @code = @artist.activation_code  
+    
+    end
+    ArtistMailer.unregister_artist_email(@artist,@code.code , request.host_with_port).deliver_later
+    message("a mail with link to remove your account has been sent","success")
+    redirect_to("/", :controller => "public")
+end
+
+def settings
+  @artist = @onlineArtist
+end
 
   private
   def artist_params
   params.require(:artist).permit(:email,:password)
   end
+
+  def new_artist_activation_code
+      
+    while true
+        uniquestring = generate_random_string
+        if ArtistActivationCode.where(:code => uniquestring).first == nil
+          return uniquestring
+        end
+      
+    end
+end
+
+
+
+
 end

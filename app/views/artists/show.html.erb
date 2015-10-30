@@ -1,8 +1,12 @@
 <% @page_title = "My page" %>
-
-	<%= link_to("edit my account" , edit_artist_path(@artist))%>
-
-	<%= link_to("delete my account" , delete_artist_path(@artist))%>
 	
-	<%= link_to("show all my music groups" , artist_music_groups_path(@artist))%>
+	<table class="table zebra-striped table-condensed table-hover">
+		<th>Email</th>
+		<th>Actions</th>
+		<tr>
+			<td><p>@artist.email</p></td>
+			<td><%= link_to("show all my music groups" , artist_music_groups_path(@artist))%></td>
+		</tr>
+	</table>
+	
 

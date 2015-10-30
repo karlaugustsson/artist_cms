@@ -3,14 +3,16 @@ class AlbumTracksController < ApplicationController
   before_action :get_track_dependencies
 
   def new
-    @track = AlbumTrack.new
+    
+    @track_length = Album.find(@album).album_tracks.count + 1
+    @track = AlbumTrack.new(:position => @track_length)
   end
 
   def create
     @track = @album.album_tracks.new(track_params)
     @track.album_id = @album.id
     if @track.save
-      message("you succesfully created a a new track")
+      message("you succesfully created a a new track","succes")
       redirect_to([@artist,@group,@album,@track])
     else
       render('new')
@@ -27,6 +29,7 @@ class AlbumTracksController < ApplicationController
 
   def edit
     @track = AlbumTrack.find(params[:id])
+    @track_length = Album.find(@album).album_tracks.count
 
   end
 
@@ -34,7 +37,7 @@ class AlbumTracksController < ApplicationController
     @track = AlbumTrack.find(params[:id])
     @track.album_id = @album.id
     if @track.update_attributes(track_params)
-      message("you succesfully updated a a track")
+      message("you succesfully updated a a track","succes")
       redirect_to([@artist,@group,@album,@track])
     else
       render('edit')

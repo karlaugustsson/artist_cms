@@ -1,23 +1,49 @@
 <% @page_title = "My album" %>
-<%= link_to("back to albums" , artist_music_group_albums_path(@artist,@group))%>
+<%= link_to("back to albums" , artist_music_group_albums_path(@artist,@owner))%>
 
-	<%= link_to("add track to album" , new_artist_music_group_album_album_track_path(@artist,@group,@album))%>
-
-	<%= link_to("edit album" , edit_artist_music_group_album_path(@artist,@group,@album))%>
-
-	<%= link_to("delete album" , delete_artist_music_group_album_path(@artist,@group,@album))%>
+<br>
+<br>
 	
 	<div>
-	<%=image_tag(@album.album_art,size:'100')%>
-	<h2><%=@album.name%></h2>
-	<% @tracks.each do |track| %>
-	<div>
-
-	<%= track.position %>
-			<%=  link_to(track.name , artist_music_group_album_album_track_path(@artist,@group,@album,track))%>
-
+		<%=image_tag(@album.album_art,size:'100')%>
+		<h2><%=@album.name%></h2>
 	</div>
 
-
-<% end %>
+	<audio id="musicPlayer">
+		Your browser does not support the audio element.
+	</audio>
+	<div class="play">
+		
+	<% @tracks.each do |track| %>
+  <source name="playlist" src="<%= track.music_file.url%>" type="<%=track.music_file_content_type%>">
+<%end%>
 </div>
+	<table class="table zebra-striped table-condensed table-hover">
+		
+		<th>#</th>
+		<th>Name</th>
+		<th>Length</th>
+		<th>Play</th>
+		<th>Actions</th>
+		<% @counter = -1 %>
+	<% @tracks.each do |track| %>
+	<tr>
+		
+		<td><p><%= track.position %></p></td>
+		<td><p><%=  link_to(track.name , artist_music_group_album_album_track_path(@artist,@owner,@album,track))%></p></td>
+		<td><%= track.track_length %></td>
+		<td><button  name="playButtons" onclick="play(<%= @counter += 1 %>)" id="<%= @counter %>"><span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span></button></td>
+		<td>
+	<%= link_to("edit track" , edit_artist_music_group_album_album_track_path(@artist,@owner,@album,track) , :class=> "btn-primary btn-xs")%>
+
+	<%= link_to("delete track" , delete_artist_music_group_album_album_track_path(@artist,@owner,@album,track), :class=> "btn-danger btn-xs")%>
+		</td>
+	</tr>
+
+	<% end %>
+			
+
+	</table>
+
+
+

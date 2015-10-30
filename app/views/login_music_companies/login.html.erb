@@ -1,0 +1,9 @@
+<% @page_title = "Login" %>
+<%= error_messages_for(@user) %>
+
+<h2>Login Music Company</h2>
+<%= form_tag(:action => "attempt_login" , :controller => "login_music_companies") do |f| %>
+
+	<%= render(:partial => "form" , :locals => {:f => f}) %>
+	<%= submit_tag("Login", :class => "btn btn-primary") %>
+<% end %>

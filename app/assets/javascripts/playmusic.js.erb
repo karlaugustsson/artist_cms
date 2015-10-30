@@ -1,0 +1,19 @@
+function play(id){
+	var audio = document.getElementById("musicPlayer")
+	audio.innerHTML = ""
+	var musicList = document.getElementsByName("playlist");
+	var buttons = document.getElementsByName("playButtons")
+	for (var i = buttons.length -1; i >= 0; i--) {
+		buttons[i].innerHTML = '<span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span>'
+	};
+	var thisbutton = document.getElementById(id)
+		thisbutton.innerHTML = '<span class="glyphicon glyphicon-pause" id="playIcon" aria-hidden="true"></span>'
+	var track = musicList[id]
+	track.src += new Date().getSeconds()
+	var cln = track.cloneNode(true);
+	audio.appendChild(cln)
+	audio.load()
+	audio.play()
+	
+
+}

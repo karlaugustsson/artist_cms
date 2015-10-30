@@ -3,13 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title><%= @page_title || "Music cms" %></title>
+		<%= stylesheet_link_tag('application') %>
+	<%= javascript_include_tag('application') %>
+	<%= csrf_meta_tag %>
 </head>
 <body>
 	<div class="container">
+			<%= render(:partial => "assets/navigation_bar")%>
 		
 			<% if !flash['notice'].blank? %>
 				
-				<div class="message-notice">
+				<div class="alert alert-<%= flash['type'] %>">
 					<p> <%= flash['notice'] %> </p>
 				</div>
 			

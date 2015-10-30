@@ -1,17 +1,22 @@
-
+<div class="form-group">
 <%= f.label(:name) %>
 
-<%= f.text_field(:name) %>
+<%= f.text_field(:name , :class => "form-control" , :placeholder => "Name") %>
 
 <%= f.label(:tag_name) %>
 
-<%= f.text_field(:tag_name) %>
+<%= f.text_field(:tag_name , :class => "form-control" , :placeholder => "tag_name") %>
+<div class="checkbox">
+<%= f.label(:solo_work) do %>
+<%= f.check_box(:solo_work ) %>
+Solo work
 
-<%= f.label(:solo_work) %>
+<%end%>
+</div>
 
-<%= f.check_box(:solo_work) %>
 
 <%= f.label(:formation_date) %>
 
-<%= f.date_field(:formation_date) %>
+<%= f.date_field(:formation_date , :class => "form-control") %>
 
+</div>	

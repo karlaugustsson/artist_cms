@@ -1,13 +1,41 @@
 <% @page_title = "all musiccompanies accounts" %>
 
 <%= link_to("new account" , new_music_company_path())%>
-
+	<table class="table zebra-striped table-condensed table-hover">
+		<th>Name</th>
+		<th>Admin</th>
+		<th>Activated</th>
+		<th>number of labels</th>
+		<th>Action</th>
+	<% if @companies.count == 1 %>
+		<tr>
+			<td><p>no accounts other than yours was found</p></td>
+		</tr>
+	<% end %>
 <% @companies.each do |company|%>
-	
-	<div>
-	<h2><%= company.email%></h2>
-	<%=link_to("show account" , music_company_path(id: company.id))%>
-	<%=link_to("edit account" , edit_music_company_path(company))%>
-	<%=button_to("delete account" ,  music_company_path( id: company.id) , :method => 'delete')%>
-	</div>
+	<%if company.id != @onlineMusicCompany.id %>
+		<tr>
+		<td><%=link_to(company.email , company) %></td>
+		<td>
+			<%= form_for(company ,:remote => true) do |f|%>
+			<%=f.hidden_field(:super_power , :value => company.super_power == 1 ? 0 : 1)%>
+			<%= submit_tag("",:class => statusbox(company.super_power) , :id => "super-power " + company.id.to_s)%>
+			<%end%>
+		</td>
+		<td>
+			<%= form_for(company ,:remote => true) do |f|%>
+			<%=f.hidden_field(:activated , :value => company.activated == 1 ? 0 : 1)%>
+			<%= submit_tag("",:class => statusbox(company.activated) , :id => "activate " + company.id.to_s)%>
+			<%end%>
+		</td>
+		<td>
+			<%= link_to(company.labels.count , music_company_labels_path(company.id)) %>
+		</td>
+		<td>
+		<%=link_to("edit account" , edit_music_company_path(company.id), :class => "btn-xs btn-primary")%>
+		<%=link_to("delete account" ,  music_company_path( id: company.id) , :method => 'delete' , :class => "btn-xs btn-danger")%>
+		</td>
+		</tr>
+	<% end %>
 <% end %>
+</table>

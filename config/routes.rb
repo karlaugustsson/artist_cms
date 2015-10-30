@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
 
+root to: 'public#index'
+get "artist_activation/register" => "artist_activation#register"
+get "artist_activation/unregister" => "artist_activation#unregister"
+get "music_companies_login" => "login_music_companies#login"
+get "login/artist" => 'login_artist#login'
+get "logout/artist" => 'login_artist#logout'
+get "music_company_logout" => "login_music_companies#logout"
+post "attempt_login_m" => "login_music_companies#attempt_login"
+post "attempt_login" => "login_artist#attempt_login"
+get '/artist/settings' => 'artists#settings' 
+
 namespace :api,:path => "", :defaults => {:subdomain => 'api',:format => :json , :content_type => "application/json"} do
   namespace :v1 do
     resources :music_groups do 
@@ -16,7 +27,7 @@ namespace :api,:path => "", :defaults => {:subdomain => 'api',:format => :json ,
   end
 end
 
-  resources :artists do 
+  resources :artists  , :except => [:index]do 
     member do
      get :delete
     end
@@ -48,6 +59,11 @@ end
     member do
       get :delete
     end
+  resources :albums do
+        member do
+          get :delete
+        end
+      end
   end
   end
   # The priority is based upon order of creation: first created -> highest priority.

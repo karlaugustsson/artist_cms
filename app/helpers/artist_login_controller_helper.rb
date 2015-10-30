@@ -1,0 +1,2 @@
+module ArtistLoginControllerHelper
+end

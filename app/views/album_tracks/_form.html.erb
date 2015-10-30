@@ -1,11 +1,11 @@
-
+<div class="form-group">
 <%= f.label(:name) %>
 
-<%= f.text_field(:name) %>
+<%= f.text_field(:name, :class => "form-control", :placeholder => "Name") %>
 
 <%= f.label(:position) %>
 
-<%= f.text_field(:position) %>
+<%= f.select(:position , 1..@track_length,{}  ,{:class => "form-control"} ) %>
 
 
 <%= f.label(:music_file) %>
@@ -13,3 +13,4 @@
 <%= f.file_field :music_file %>
 
 
+</div>

@@ -6,5 +6,5 @@
 <%= form_for([@artist,@group,@album,@track], :html => { multipart: true }) do |f| %>
 
 	<%= render(:partial => "album_tracks/form" , :locals => {:f => f}) %>
-	<%= submit_tag("edit current album track") %>
+	<%= submit_tag("edit current album track", :class=> "btn btn-primary") %>
 <% end %>

@@ -5,6 +5,6 @@
 
 <%= form_for([@artist,@group,@album,@track] , html: { multipart: true } ) do |f| %>
 
-	<%= render(:partial => "album_tracks/form" , :locals => {:f => f}) %>
-	<%= submit_tag("Create new album track") %>
+	<%= render(:partial => "album_tracks/form" , :locals => {:f => f , :t => @track_length}) %>
+	<%= submit_tag("Create new album track" , :class=> "btn btn-primary") %>
 <% end %>

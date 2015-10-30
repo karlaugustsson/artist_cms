@@ -9,7 +9,7 @@ class MusicGroupsController < ApplicationController
     @group = @artist.music_groups.new(group_params)
     if @group.save
       @artist.music_groups << @group
-      message('You succesfully created a musicact')
+      message('You succesfully created a musicact',"success")
       redirect_to([@artist,@group])
     else
       render('new')
@@ -32,7 +32,7 @@ class MusicGroupsController < ApplicationController
   def update
       @group = MusicGroup.find(params[:id])
   if @group.update_attributes(group_params)
-      message('You succesfully updated a musicact')
+      message('You succesfully updated a musicact',"success")
       redirect_to(artist_music_group_path(@artist,@group))
   else
     render('edit')
@@ -47,7 +47,7 @@ class MusicGroupsController < ApplicationController
   @group = MusicGroup.find(params[:id]).destroy
   
   @group.destroy
-  message('You succesfully deleted a musicact')
+  message('You succesfully deleted a musicact',"success")
   redirect_to(artist_music_groups_path(@artist))
   end
 

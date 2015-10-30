@@ -1,6 +1,8 @@
 class LabelsController < ApplicationController
   layout 'standard'
-  before_action :music_company
+  before_action :set_music_company_from_param
+  before_action :redirect_if_not_logged_in_music_company 
+  before_action :set_logged_in_music_company
   def new
     @label = Label.new()
 
@@ -10,7 +12,7 @@ class LabelsController < ApplicationController
     @label= MusicCompany.find(params[:music_company_id]).labels.new(label_params)
     
     if @label.save
-      message("you succesfully created a label#{params[:label]}")
+      message("you succesfully created a label #{@label.label_name}" ,"success")
       redirect_to([@company,@label])
     else
       render('new')
@@ -35,7 +37,7 @@ class LabelsController < ApplicationController
     @label = Label.find(params[:id])
 
     if @label.update_attributes(label_params)
-      message("you succesfully updated a label")
+      message("you succesfully updated a label","success")
     redirect_to([@company,@label])
     else
     render('edit')
@@ -49,7 +51,7 @@ class LabelsController < ApplicationController
 
   def destroy
     @label = Label.find(params[:id]).destroy
-    message("you succesfully deleted a label")
+    message("you succesfully deleted a label","success")
     redirect_to(music_company_labels_path(@company))
   end
 
@@ -58,8 +60,13 @@ class LabelsController < ApplicationController
   def label_params
   params.require(:label).permit(:label_name,:music_company_id)
   end
-def music_company
-  @company = MusicCompany.find(params[:music_company_id])
+def set_music_company_from_param
+  if @company = MusicCompany.where(:id => params[:music_company_id]).exists?
+    @company = MusicCompany.where(:id => params[:music_company_id]).first
+  else
+    message("couldnt find this music company","warning")
+    redirect_to("/")
+  end
 end
 
 end

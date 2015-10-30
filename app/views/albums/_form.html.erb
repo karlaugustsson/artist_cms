@@ -1,29 +1,43 @@
+<div class="form-group">
 
+<%= f.label(:name ) %>
 
-<%= f.label(:name) %>
-
-<%= f.text_field(:name) %>
+<%= f.text_field(:name , :class => "form-control" , :placeholder => "Name") %>
 
 <%= f.label(:release_date) %>
 
-<%= f.date_field(:release_date) %>
+<%= f.date_field(:release_date , :class => "form-control" ) %>
 
 <%= f.label(:album_art) %>
 
-<%= f.file_field(:album_art) %>
+<%= f.file_field(:album_art ) %>
 
 <%= f.hidden_field(:album_art_cache) %>
 
 <%= f.label(:published) %>
-
+<div class="checkbox">
+<%= f.label(:published) do %>
 <%= f.check_box(:published) %>
+Published
+
+<%end%>
+</div>
 
 
-  <% for label in @label_ids %>
-		 <%= f.label("#{:label_ids}_#{label.id}",label.label_name) %>
-      <%=f.check_box(:label_ids,{ :multiple => true }, label.id, nil)  %>
-     
+<%= f.label("Music Company labels") %> 
+<%	@labels.each  do |l| %>
+  
+  <div class="checkbox">
 
+  	<%= f.label("#{:label_ids}_" + l.id.to_s) do %>
+    	<%=f.check_box(:label_ids,{ :multiple => true }, l.id, nil)  %>
+    	<%= l.label_name %>
+    	
   <% end %>
+  </div>
 
+<% end %>
+
+
+</div>
 

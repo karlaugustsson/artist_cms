@@ -5,5 +5,5 @@
 <%= form_for([@company,@label]) do |f| %>
 
 	<%= render(:partial => "labels/form" , :locals => {:f => f}) %>
-	<%= submit_tag("update music label") %>
+	<%= submit_tag("update music label", :class=> "btn btn-primary") %>
 <% end %>

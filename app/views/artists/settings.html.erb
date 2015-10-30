@@ -1,0 +1,14 @@
+
+<% @page_title = "Settings" %>
+
+<table class="table zebra-striped table-condensed table-hover">
+	<th>Actions</th>
+<tr>
+	<td><%= link_to("edit my account" , edit_artist_path(@artist))%></td>
+</tr>
+
+<tr>
+	<td><%= link_to("delete my account" , delete_artist_path(@artist))%></td>
+
+</tr>	
+</table>
