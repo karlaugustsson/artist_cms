@@ -9,8 +9,11 @@ get "logout/artist" => 'login_artist#logout'
 get "music_company_logout" => "login_music_companies#logout"
 post "attempt_login_m" => "login_music_companies#attempt_login"
 post "attempt_login" => "login_artist#attempt_login"
-get '/artist/settings' => 'artists#settings' 
+get '/artist/settings' => 'artists#settings'
 
+get "music_company_grant_publish_permission" => 'music_companies#grant_publish_permission'
+get "music_company_revoke_publish_permission" => 'music_companies#revoke_publish_permission'
+get '/music_company/settings' => 'music_companies#settings'
 namespace :api,:path => "", :defaults => {:subdomain => 'api',:format => :json , :content_type => "application/json"} do
   namespace :v1 do
     resources :music_groups do 

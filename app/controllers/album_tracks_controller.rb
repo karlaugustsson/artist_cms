@@ -20,7 +20,7 @@ class AlbumTracksController < ApplicationController
   end
 
   def index
-    @tracks = @album.tracks
+    @tracks = @album.album_tracks
   end
 
   def show

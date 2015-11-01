@@ -1,14 +1,23 @@
 <% @page_title = "My Label" %>
 <%= link_to("back to all labels" , music_company_labels_path(@company))%>
+<% @counter = 0 %>
 
+<% @label.albums.each do |a| %>
+	<% if a.accepted_by_label == true %>
+		
+		<% @counter = @counter += 1 %>
+
+	<% end %>
+
+<% end %>
 
 <table class="table zebra-striped table-condensed table-hover">
 	<th>Name</th>
-	<th>no albums published</th>
+	<th>number of  albums published</th>
 	<th>Actions</th>
 	<tr>
 		<td><p><%= @label.label_name %></p></td>
-		<td><%=link_to(@label.albums.count, music_company_label_albums_path(@company,@label))%></td>
+		<td><%=link_to(pluralize(@counter , "album"), music_company_label_albums_path(@company,@label))%></td>
 		<td>
 			<%= link_to("delete my music label" , delete_music_company_label_path(@company,@label) , :class => "btn-xs btn-danger")%>
 			<%= link_to("edit my music label" , edit_music_company_label_path(@company,@label) , :class => "btn-xs btn-primary")%>

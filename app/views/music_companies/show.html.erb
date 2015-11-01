@@ -6,16 +6,58 @@
 	<tr>
 	<td><%= link_to("show all my music labels" , music_company_labels_path(@company))%></td>
 	</tr>
-	<tr>
-		<td><%= link_to("edit my account" , edit_music_company_path(@company))%></td>
-	</tr>
-	<tr>
-	<td><%= link_to("delete my account" , delete_music_company_path(@company))%></td>
-	</tr>
-	
-		
-		
-	
-
-
 </table>
+
+
+<% @labels.each do |l|%>
+	<% if l.album_label_relation().has_yet_to_be.count >= 1 %>
+		<h2> <%= pluralize(l.album_label_relation().count , "album" )%> needs to be looked over </h2>
+		<table class="table zebra-striped table-condensed table-hover">
+			<th>Artist name</th>
+			<th>Album name</th>
+			<th>Label name</th>
+			<th>Action</th>
+
+
+	<% l.albums.each do |a| %>
+		
+		<% albuminfo = a.album_label_relation().has_yet_to_be.label_owner(l.id) %>
+		
+			<tr>
+				<td> 
+					<% a.music_groups.each_with_index do |g,i| %>
+					
+						<% if i == a.music_groups.size - 1 %>
+						
+							<p><%= g.name %></p>
+					
+						<% else %>
+					
+							<p><%= g.name %> , </p>
+					
+						<%end%>
+				
+				<% end %>
+
+				</td>
+				<td> <%= a.name %> </td>
+				<td><%= l.label_name %> </td>
+				<td>
+					<%= link_to("grant permission to publish" , {:controller => "music_companies" , :action => "grant_publish_permission" ,:company_id => @company.id, :album_id => a.id , :label_id => l.id },:class => "btn-xs btn-success")%>
+					<%= link_to("dissallow permission to publish" , {:controller => "music_companies" , :action => "revoke_publish_permission" ,:company_id => @company.id, :album_id => a.id , :label_id => l.id },:class => "btn-xs btn-danger")%>
+
+
+				</td>
+		
+			</tr>
+		
+		<%end%>
+
+
+
+
+		</table>
+	
+	<%end%>
+
+<% end %>

@@ -25,6 +25,7 @@ class AlbumsController < ApplicationController
   def index
     @album = @owner.albums
 
+
   end
 
   def show
@@ -40,6 +41,7 @@ class AlbumsController < ApplicationController
   def update
     @album = Album.find(params[:id])
     if @album.update_attributes(album_params)
+      check_with_all_labels_for_publish_permission(@album,@album.labels)
       message('You succesfully updated an album',"succes")
       redirect_to([@artist,@owner,@album])
     else
@@ -70,6 +72,7 @@ class AlbumsController < ApplicationController
     else
     @company = MusicCompany.find(params[:music_company_id])
     @owner = Label.find(params[:label_id])
+
     end
 
 

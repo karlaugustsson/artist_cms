@@ -1,6 +1,6 @@
 class ArtistsController < ApplicationController
   before_action :redirect_if_not_logged_in_artist , :except => [:new,:create]
-  before_action :redirect_if_logged_in , :only => [:new]
+  before_action :redirect_if_logged_in_artist , :only => [:new]
   before_action :set_logged_in_artist , :except => [:new , :create]
   before_action :remove_logged_in_music_company
   layout "standard"

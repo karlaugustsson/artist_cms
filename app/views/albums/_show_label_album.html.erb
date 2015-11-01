@@ -1,0 +1,49 @@
+<%= link_to("back to all albums" , music_company_label_albums_path(@company,@owner))%>
+
+	
+	<table class="table zebra-striped table-condensed table-hover">
+		<tr>
+		<th>		<%=image_tag(@album.album_art,size:'100')%>
+		</th>
+		<th><h2><%=@album.name%></h2></th>
+		</tr>
+	</table>
+
+	<audio id="musicPlayer">
+		Your browser does not support the audio element.
+	</audio>
+	<div class="play">
+		
+	<% @tracks.each do |track| %>
+  <source name="playlist" src="<%= track.music_file.url%>" type="<%=track.music_file_content_type%>">
+<%end%>
+</div>
+	<table class="table zebra-striped table-condensed table-hover">
+		
+		<th>#</th>
+		<th>Name</th>
+		<th>Length</th>
+		<th>Play</th>
+		<th>Actions</th>
+		<% @counter = -1 %>
+	<% if @tracks.length == 0%>
+	<tr>
+		<td>No tracks found</td>
+	</tr>
+	<%end%>
+	<% @tracks.each do |track| %>
+	<tr>
+		
+		<td><p><%= track.position %></p></td>
+		<td></td>
+		<td><%= track.track_length %></td>
+		<td><button  name="playButtons" onclick="play(<%= @counter += 1 %>)" id="<%= @counter %>"><span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span></button></td>
+		<td>
+
+		</td>
+	</tr>
+
+	<% end %>
+			
+
+	</table>

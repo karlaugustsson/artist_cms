@@ -1,0 +1,40 @@
+	<%=link_to("back to group" , artist_music_group_path(@artist,@owner))%>
+	<br>
+	<br>
+<%= link_to("new music group album" , new_artist_music_group_album_path(@artist,@owner) , :class => "btn-primary btn-lg" , :role => "button")%>
+<br>
+<br>
+
+<table class="table zebra-striped table-condensed table-hover">
+<th>Album art</th>
+<th>Name</th>
+<th>Number of songs</th>
+<th>Release-date</th>
+<th>Published</th>
+<th>Accepted by labels</th>
+<th>Actions</th>
+<% if @album.count == 0 %>
+	<tr><td><p>No albums found</p></td></tr>
+<%end%>
+
+<% @album.each do |album|%>
+	
+	<tr>
+	<td><%=image_tag(album.album_art,size:'40')%></td>
+	<td><%=link_to(album.name, artist_music_group_album_path(@artist,@owner,album))%></td>
+	<td><p><%= album.album_tracks.count %></p></td>
+	<td><p><%= album.release_date.strftime("%F") %></p></td>
+	<td><p><%= album.published %></p></td>
+	<th><%= album.accepted_by_label %></th>
+	<th>
+	<%=link_to("edit album" , edit_artist_music_group_album_path(@artist,@owner,album),:class => "btn-xs btn-primary")%>
+	<%=link_to("delete album" , artist_music_group_album_path(@artist,@owner,album) , :method => 'delete',:class => "btn-xs btn-primary")%>
+
+
+	</th>
+
+	</tr>
+
+
+<% end %>
+</table>

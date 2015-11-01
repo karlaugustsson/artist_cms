@@ -1,0 +1,45 @@
+<%=link_to("back to label" , music_company_label_path(@company,@owner))%>
+<table class="table zebra-striped table-condensed table-hover">
+	<th>Name</th>
+	<th>Marked as published</th>
+	<th> actions</th>
+	<% if @album.count == 0 %>
+	<tr><td><p>No albums found</p></td></tr>
+	<%end%>
+<% @album.each do |album|%>
+	
+	<tr>
+		<td><p><%= album.name%></p></td>
+		<td>
+			<% album.labels.each do |l| %>
+				<% if album.album_label_relation().label_owner(l.id).allowed_publish == 0 %>
+				<span class="<%= statusbox(0)%>"><%= l.label_name %> </span><br>
+				<% elsif album.album_label_relation().label_owner(l.id).allowed_publish == nil %>
+				<span class="<%= statusbox(nil)%>"><%= l.label_name %> </span><br>
+				<% else %>
+				<span class="<%= statusbox(1)%>"><%= l.label_name %> </span><br>
+				<% end%>
+			<% end %>
+
+
+		</td>
+		<td>	
+			<%=link_to("show album" , music_company_label_album_path(@company,@owner,album) , :class => "btn-xs btn-primary")%>
+
+			<% if album.album_label_relation().label_owner(@owner.id).allowed_publish == 0 ||  album.album_label_relation().label_owner(@owner.id).allowed_publish == nil %>
+				<%= link_to("grant permission to publish" , {:controller => "music_companies" , :action => "grant_publish_permission" ,:company_id => @company.id, :album_id => album.id , :label_id => @owner.id },:class => "btn-xs btn-success")%>
+			<%else%>
+				<%= link_to("revoke permission to publish" , {:controller => "music_companies" , :action => "revoke_publish_permission" ,:company_id => @company.id, :album_id => album.id , :label_id => @owner.id },:class => "btn-xs btn-danger")%>
+			<%end%>
+			
+		</td>
+	</tr>
+
+
+	</div>
+<% end %>
+
+
+
+</table>
+

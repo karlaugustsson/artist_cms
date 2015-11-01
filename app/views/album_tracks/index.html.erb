@@ -1,14 +1,14 @@
 <% @page_title = "all my tracks" %>
 
-<%= link_to("new music album track" , new_artist_music_group_album_track_path(@artist,@group))%>
-	<%=link_to("back to group" , artist_music_group_album_path(@artist,@group,@album))%>
+<%= link_to("new music album track" , new_artist_music_group_album_album_track_path(@artist,@group,@album))%>
+	<%=link_to("back to album" , artist_music_group_album_path(@artist,@group,@album))%>
 
-<%@track.each do |track|%>
+<%@tracks.each do |track|%>
 	
 	<div>
 	<h2><%= track.name%></h2>
 	<%=link_to("show track" , artist_music_group_album_album_track_path(@artist,@group,@album,track))%>
-	<%=link_to("edit track" , edit_artist_music_group_album_path(@artist,@group,@album,track))%>
-	<%=link_to("delete track" , artist_music_group_album_path(@artist,@group,@album,track) , :method => 'delete')%>
+	<%=link_to("edit track" ,  edit_artist_music_group_album_album_track_path(@artist,@group,@album,track))%>
+	<%=link_to("delete track" , artist_music_group_album_album_track_path(@artist,@group,@album,track) , :method => 'delete')%>
 	</div>
 <% end %>

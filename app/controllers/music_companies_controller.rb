@@ -4,7 +4,7 @@ class MusicCompaniesController < ApplicationController
   before_action :set_logged_in_music_company
    before_action :remove_logged_in_artist
   before_action :have_the_power, :only => :index
-  before_action :redirect_if_not_activated
+  before_action :redirect_if_not_activated_music_company
   def new
     @company = MusicCompany.new
   end
@@ -22,10 +22,13 @@ class MusicCompaniesController < ApplicationController
 
   def index
     @companies = MusicCompany.all
+
+  
   end
 
   def show
     @company= MusicCompany.find(params[:id])
+    @labels = @company.labels
   end
 
   def edit
@@ -68,7 +71,46 @@ class MusicCompaniesController < ApplicationController
   
   end
 
+  def grant_publish_permission
+    @company = MusicCompany.find(params[:company_id])
+    @album = Album.find(params[:album_id])
+    
+    @label = Label.find(params[:label_id])
+
+    @album_label =  AlbumLabelRelation.where(:label_id => @label.id , :album_id => @album.id).first
+     @album_label.allowed_publish = true
+     @album_label.save()
+
+    check_with_all_labels_for_publish_permission(@album,@album.labels)
+    redirect_to(music_company_label_albums_path(@company,@label,@label))
+
+
+  end
+
+    def revoke_publish_permission
+    @company = MusicCompany.find(params[:company_id])
+    @album = Album.find(params[:album_id])
+    
+    @label = Label.find(params[:label_id])
+
+      @album_label =  AlbumLabelRelation.where(:label_id => @label.id , :album_id => @album.id).first
+     @album_label.allowed_publish = false
+     @album_label.save()
+
+    check_with_all_labels_for_publish_permission(@album,@album.labels)
+    redirect_to(music_company_label_albums_path(@company,@label,@label))
+
+
+  end
+
+  def settings 
+    @company = @onlineMusicCompany
+  end
+
+
   private
+
+
   def music_company_params
     params.require(:music_company).permit(:email,:password , @onlineMusicCompany.super_power ? [:activated , :super_power]  : "")
   end

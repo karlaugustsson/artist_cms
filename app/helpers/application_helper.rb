@@ -8,6 +8,8 @@ module ApplicationHelper
 		if object == 1
 
 			return  "box true"
+		elsif object == nil
+			return "box pending"
 		else
 			return  "box false"
 		end
