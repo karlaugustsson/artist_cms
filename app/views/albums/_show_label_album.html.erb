@@ -24,7 +24,9 @@
 		<th>Name</th>
 		<th>Length</th>
 		<th>Play</th>
+		<% if @owner.id.to_s == @onlineMusicCompany.id.to_s %>
 		<th>Actions</th>
+		<% end %>
 		<% @counter = -1 %>
 	<% if @tracks.length == 0%>
 	<tr>
@@ -35,12 +37,10 @@
 	<tr>
 		
 		<td><p><%= track.position %></p></td>
-		<td></td>
+		<td><p><%= track.name %></p></td>
 		<td><%= track.track_length %></td>
+		
 		<td><button  name="playButtons" onclick="play(<%= @counter += 1 %>)" id="<%= @counter %>"><span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span></button></td>
-		<td>
-
-		</td>
 	</tr>
 
 	<% end %>

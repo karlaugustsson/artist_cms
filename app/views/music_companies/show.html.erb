@@ -4,14 +4,19 @@
 	
 
 	<tr>
+	<% if @company.super_power == 0 %>
 	<td><%= link_to("show all my music labels" , music_company_labels_path(@company))%></td>
+	<% else %>
+		<td><%= link_to("List all music company accounts " , music_companies_path())%></td>
+	<% end %>
 	</tr>
 </table>
 
 
 <% @labels.each do |l|%>
-	<% if l.album_label_relation().has_yet_to_be.count >= 1 %>
-		<h2> <%= pluralize(l.album_label_relation().count , "album" )%> needs to be looked over </h2>
+
+	<% if l.album_label_relation().has_yet_to_be.count > 0 %>
+		<h2> <%= pluralize(l.album_label_relation().has_yet_to_be.count , "album" )%> needs to be looked over </h2>
 		<table class="table zebra-striped table-condensed table-hover">
 			<th>Artist name</th>
 			<th>Album name</th>
@@ -19,15 +24,15 @@
 			<th>Action</th>
 
 
-	<% l.albums.each do |a| %>
+	<% l.album_label_relation().has_yet_to_be.each do |a| %>
 		
-		<% albuminfo = a.album_label_relation().has_yet_to_be.label_owner(l.id) %>
+		<% puts a.album.name %>
 		
 			<tr>
 				<td> 
-					<% a.music_groups.each_with_index do |g,i| %>
+					<% a.album.music_groups.each_with_index do |g,i| %>
 					
-						<% if i == a.music_groups.size - 1 %>
+						<% if i == a.album.music_groups.size - 1 %>
 						
 							<p><%= g.name %></p>
 					
@@ -40,11 +45,11 @@
 				<% end %>
 
 				</td>
-				<td> <%= a.name %> </td>
+				<td> <%= a.album.name %> </td>
 				<td><%= l.label_name %> </td>
 				<td>
-					<%= link_to("grant permission to publish" , {:controller => "music_companies" , :action => "grant_publish_permission" ,:company_id => @company.id, :album_id => a.id , :label_id => l.id },:class => "btn-xs btn-success")%>
-					<%= link_to("dissallow permission to publish" , {:controller => "music_companies" , :action => "revoke_publish_permission" ,:company_id => @company.id, :album_id => a.id , :label_id => l.id },:class => "btn-xs btn-danger")%>
+					<%= link_to("grant permission to publish" , {:controller => "music_companies" , :action => "grant_publish_permission" ,:company_id => @company.id, :album_id => a.album.id , :label_id => l.id },:class => "btn-xs btn-success")%>
+					<%= link_to("dissallow permission to publish" , {:controller => "music_companies" , :action => "revoke_publish_permission" ,:company_id => @company.id, :album_id => a.album.id , :label_id => l.id },:class => "btn-xs btn-danger")%>
 
 
 				</td>

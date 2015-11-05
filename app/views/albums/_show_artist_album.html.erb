@@ -2,9 +2,14 @@
 
 <br>
 <br>
-<%= link_to("Add new track" , new_artist_music_group_album_album_track_path(@artist,@owner,@album) ,  :class => "btn-primary btn-lg")%>
-<br>
-<br>
+
+<% if @onlineArtist.id == @owner.id %>
+
+	<%= link_to("Add new track" , new_artist_music_group_album_album_track_path(@artist,@owner,@album) ,  :class => "btn-primary btn-lg")%>
+	<br>
+	<br>
+
+<% end %>
 	
 	<table class="table zebra-striped table-condensed table-hover">
 		<tr>
@@ -29,7 +34,13 @@
 		<th>Name</th>
 		<th>Length</th>
 		<th>Play</th>
-		<th>Actions</th>
+		
+		<% if @onlineArtist.id == @owner.id %>
+			
+			<th>Actions</th>
+
+		<% end %>	
+
 		<% @counter = -1 %>
 	<% @tracks.each do |track| %>
 	<tr>
@@ -37,12 +48,18 @@
 		<td><p><%= track.position %></p></td>
 		<td><p><%=  link_to(track.name , artist_music_group_album_album_track_path(@artist,@owner,@album,track))%></p></td>
 		<td><%= track.track_length %></td>
-		<td><button  name="playButtons" onclick="play(<%= @counter += 1 %>)" id="<%= @counter %>"><span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span></button></td>
+		
 		<td>
-	<%= link_to("edit track" , edit_artist_music_group_album_album_track_path(@artist,@owner,@album,track) , :class=> "btn-primary btn-xs")%>
-
-	<%= link_to("delete track" , delete_artist_music_group_album_album_track_path(@artist,@owner,@album,track), :class=> "btn-danger btn-xs")%>
+			<button  name="playButtons" onclick="play(<%= @counter += 1 %>)" id="<%= @counter %>"><span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span></button>
 		</td>
+		
+		<% if @onlineArtist.id == @owner.id %>
+		<td>
+		<%= link_to("edit track" , edit_artist_music_group_album_album_track_path(@artist,@owner,@album,track) , :class=> "btn-primary btn-xs")%>
+
+		<%= link_to("delete track" , delete_artist_music_group_album_album_track_path(@artist,@owner,@album,track), :class=> "btn-danger btn-xs")%>
+			</td>
+		<% end %>
 	</tr>
 
 	<% end %>

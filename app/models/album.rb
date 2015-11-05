@@ -1,7 +1,7 @@
 require 'file_size_validator'
 class Album < ActiveRecord::Base
    has_many :album_label_relation
-  has_many :labels  ,:through => :album_label_relation
+  has_many :labels  ,:through => :album_label_relation , :dependent => :destroy
 	
 	has_and_belongs_to_many :music_groups
 	has_many :album_tracks
@@ -11,8 +11,11 @@ class Album < ActiveRecord::Base
  
 	mount_uploader :album_art, AlbumArtUploader
 
-  scope :search , lambda { |search| where("name LIKE ?", "%#{search}%") }
+  scope :search , lambda { |search| where("albums.name LIKE ?", "%#{search}%") }
+  scope :published , lambda { where("albums.published = 1") }
   scope :release_date_asc , lambda { order("albums.release_date ASC") }
+    scope :release_date_desc , lambda { order("albums.release_date DESC") }
+  scope :accepted_by_label , lambda { where("albums.accepted_by_label = 1") }
   
 	validates :album_art, 
     :file_size => { 

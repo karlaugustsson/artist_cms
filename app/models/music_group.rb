@@ -3,7 +3,7 @@ class MusicGroup < ActiveRecord::Base
 	has_and_belongs_to_many :albums
 	has_and_belongs_to_many :album_tracks
 
-	scope :search , lambda { |search| where("name LIKE ?", "%#{search}%") }
+	scope :search , lambda { |search| where("music_groups.name LIKE ?", "%#{search}%") }
 
 
 

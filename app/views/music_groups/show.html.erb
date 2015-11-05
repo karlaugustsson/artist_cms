@@ -4,23 +4,32 @@
 	<th>Name</th>
 	<th>Number of albums</th>
 	<th>Formation date</th>
-	<th>Actions</th>
+	
+	<% if @onlineArtist.id == @artist.id %>
+		
+		<th>Actions</th>
+	
+	<%end%>
+
 	<tr>
 
 		<td><p><%= @group.name %></p></td>
 		<td><%= link_to(pluralize(@group.albums.count, 'album') , artist_music_group_albums_path(@artist,@group))%></td>
 		<td><p><%=@group.formation_date.strftime("%F")  %></p></td>
-		<td>
-				<%= link_to("edit my music group" , edit_artist_music_group_path(@artist,@group),:class => "btn-xs btn-primary")%>
+		
+		<% if @onlineArtist.id == @artist.id %>
+			<td>
+					<%= link_to("edit my music group" , edit_artist_music_group_path(@artist,@group),:class => "btn-xs btn-primary")%>
 
 
-	<%= link_to("delete my music group" , delete_artist_music_group_path(@artist,@group),:class => "btn-xs btn-danger")%>
+					<%= link_to("delete my music group" , delete_artist_music_group_path(@artist,@group),:class => "btn-xs btn-danger")%>
 
-		</td>
+			</td>
 
+		<% end %>
 
 	
-</tr>
+	</tr>
 </table>
 
 

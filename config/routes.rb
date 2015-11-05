@@ -14,19 +14,13 @@ get '/artist/settings' => 'artists#settings'
 get "music_company_grant_publish_permission" => 'music_companies#grant_publish_permission'
 get "music_company_revoke_publish_permission" => 'music_companies#revoke_publish_permission'
 get '/music_company/settings' => 'music_companies#settings'
+
 namespace :api,:path => "", :defaults => {:subdomain => 'api',:format => :json , :content_type => "application/json"} do
   namespace :v1 do
-    resources :music_groups do 
-      resources :albums do 
-        resources :album_tracks
-      end
-      
-    
 
-    end
-    resources :search_album_tracks
-    resources :search_albums
-    resources :search_music_groups
+    resources :search_album_tracks , :only => [:show,:index,:edit,:update]
+    resources :search_albums , :only => [:show,:index,:edit,:update]
+    resources :search_music_groups , :only => [:show,:index,:edit,:update]
   end
 end
 
@@ -62,10 +56,7 @@ end
     member do
       get :delete
     end
-  resources :albums do
-        member do
-          get :delete
-        end
+  resources :albums  , :only => [:index, :show ]do
       end
   end
   end

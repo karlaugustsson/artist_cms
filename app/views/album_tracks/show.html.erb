@@ -19,7 +19,9 @@ Your browser does not support the audio element.
 		<th>Name</th>
 		<th>Length</th>
 		<th>Play</th>
-		<th>Actions</th>
+		<% if @onlineArtist.id == @group.id %>
+			<th>Actions</th>
+		<% end %>
 		<tr>
 			<td><%=@track.position%></td>
 			<td><%= @track.name %></td>
@@ -30,9 +32,14 @@ Your browser does not support the audio element.
 				</button>
 
 			</td>
-			<td>	<%= link_to("edit track" , edit_artist_music_group_album_album_track_path(@artist,@group,@album,@track), :class=> "btn-primary btn-xs")%>
+			<% if @onlineArtist.id == @group.id %>
+				<td>
+					<%= link_to("edit track" , edit_artist_music_group_album_album_track_path(@artist,@group,@album,@track), :class=> "btn-primary btn-xs")%>
 
-	<%= link_to("delete track" , delete_artist_music_group_album_album_track_path(@artist,@group,@album,@track), :class=> "btn-danger btn-xs")%></td>
+					<%= link_to("delete track" , delete_artist_music_group_album_album_track_path(@artist,@group,@album,@track), :class=> "btn-danger btn-xs")%>
+				</td>
+			<% end %>	
+		
 		</tr>
 
 

@@ -1,10 +1,12 @@
 class MusicCompaniesController < ApplicationController
   layout 'standard'
   before_action :redirect_if_not_logged_in_music_company , :except => [:create,:new]
+  before_action :remove_logged_in_artist
   before_action :set_logged_in_music_company
-   before_action :remove_logged_in_artist
-  before_action :have_the_power, :only => :index
   before_action :redirect_if_not_activated_music_company
+  before_action :have_the_power, :only => :index
+  before_action :auth_owner_music_company_account_or_deny_action , :only => [:edit,:update]
+
   def new
     @company = MusicCompany.new
   end
@@ -114,4 +116,18 @@ class MusicCompaniesController < ApplicationController
   def music_company_params
     params.require(:music_company).permit(:email,:password , @onlineMusicCompany.super_power ? [:activated , :super_power]  : "")
   end
+
+def auth_owner_music_company_account_or_deny_action
+
+    if @onlineMusicCompany.super_power == 0 
+      puts request.request_method_symbol
+      
+      if @onlineMusicCompany.id.to_s != params[:id]
+        deny_user_action(@onlineMusicCompany)
+
+      end
+
+    end  
+end
+
 end

@@ -14,14 +14,20 @@
 <table class="table zebra-striped table-condensed table-hover">
 	<th>Name</th>
 	<th>number of  albums published</th>
+	<% if @company.id.to_s == @onlineMusicCompany.id.to_s %>
 	<th>Actions</th>
+	<% end %>
 	<tr>
 		<td><p><%= @label.label_name %></p></td>
 		<td><%=link_to(pluralize(@counter , "album"), music_company_label_albums_path(@company,@label))%></td>
-		<td>
-			<%= link_to("delete my music label" , delete_music_company_label_path(@company,@label) , :class => "btn-xs btn-danger")%>
-			<%= link_to("edit my music label" , edit_music_company_label_path(@company,@label) , :class => "btn-xs btn-primary")%>
-		</td>
+		<% if @company.id.to_s == @onlineMusicCompany.id.to_s || @onlineMusicCompany.super_power == 1 %>
+			<td>
+				<%= link_to("delete my music label" , delete_music_company_label_path(@company,@label) , :class => "btn-xs btn-danger")%>
+				<% if @company.id.to_s == @onlineMusicCompany.id.to_s %>
+					<%= link_to("edit my music label" , edit_music_company_label_path(@company,@label) , :class => "btn-xs btn-primary")%>
+					<% end %>
+			</td>
+		<% end %>	
 	
 		
 	</tr>

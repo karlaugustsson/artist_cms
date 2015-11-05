@@ -1,5 +1,5 @@
 class MusicCompany < ActiveRecord::Base
-	has_many :labels
+	has_many :labels , :dependent => :destroy
 	has_secure_password
 
 	EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i	

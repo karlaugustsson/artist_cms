@@ -2,6 +2,7 @@
 <table class="table zebra-striped table-condensed table-hover">
 	<th>Name</th>
 	<th>Marked as published</th>
+
 	<th> actions</th>
 	<% if @album.count == 0 %>
 	<tr><td><p>No albums found</p></td></tr>
@@ -25,12 +26,14 @@
 		</td>
 		<td>	
 			<%=link_to("show album" , music_company_label_album_path(@company,@owner,album) , :class => "btn-xs btn-primary")%>
-
-			<% if album.album_label_relation().label_owner(@owner.id).allowed_publish == 0 ||  album.album_label_relation().label_owner(@owner.id).allowed_publish == nil %>
-				<%= link_to("grant permission to publish" , {:controller => "music_companies" , :action => "grant_publish_permission" ,:company_id => @company.id, :album_id => album.id , :label_id => @owner.id },:class => "btn-xs btn-success")%>
-			<%else%>
-				<%= link_to("revoke permission to publish" , {:controller => "music_companies" , :action => "revoke_publish_permission" ,:company_id => @company.id, :album_id => album.id , :label_id => @owner.id },:class => "btn-xs btn-danger")%>
-			<%end%>
+			<% if @company.id.to_s == @onlineMusicCompany.id.to_s %>
+				<% if album.album_label_relation().label_owner(@owner.id).allowed_publish == 0 ||  album.album_label_relation().label_owner(@owner.id).allowed_publish == nil %>
+					
+					<%= link_to("grant permission to publish" , {:controller => "music_companies" , :action => "grant_publish_permission" ,:company_id => @company.id, :album_id => album.id , :label_id => @owner.id },:class => "btn-xs btn-success")%>
+				<%else%>
+					<%= link_to("revoke permission to publish" , {:controller => "music_companies" , :action => "revoke_publish_permission" ,:company_id => @company.id, :album_id => album.id , :label_id => @owner.id },:class => "btn-xs btn-danger")%>
+				<%end%>
+			<% end %>	
 			
 		</td>
 	</tr>

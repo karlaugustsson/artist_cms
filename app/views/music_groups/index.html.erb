@@ -1,17 +1,19 @@
 <% @page_title = "all my groups" %>
 
 <%= link_to("back to artist accounts " , artist_path(@artist.id))%>
-
 <br>
 <br>
-
+<% if @onlineArtist.id == @artist.id %>
 <%= link_to("new music group" , new_artist_music_group_path(@artist) , :class => "btn-primary btn-lg" , :role => "button")%>
 
 <br>
 <br>
+<% end %>
 <table  class="table zebra-striped table-condensed table-hover">
 	<th>Name</th>
+	<% if @onlineArtist.id == @artist.id %>
 	<th>Actions</th>
+	<% end %>
 	<tr>
 <% if @group.count == 0%>
 <tr><td>No musicGroups were found</td></tr>
@@ -19,10 +21,15 @@
 <%@group.each do |group|%>
 <tr>
 	<td><%=link_to(group.name, artist_music_group_path(@artist,group))%></td>
-	<td>
-	<%=link_to("edit group" , edit_artist_music_group_path(@artist,group), :class => "btn-xs btn-primary")%>
-	<%=link_to("delete group",artist_music_group_path(@artist,group) ,:method =>'delete',:class => "btn-danger btn-xs ")%>
-	</td>
+	
+	<% if @onlineArtist.id == @artist.id %>
+	
+		<td>
+		<%=link_to("edit group" , edit_artist_music_group_path(@artist,group), :class => "btn-xs btn-primary")%>
+		<%=link_to("delete group",artist_music_group_path(@artist,group) ,:method =>'delete',:class => "btn-danger btn-xs ")%>
+		</td>
+	<% end %>
+
 </tr>
 <% end %>
 </table>

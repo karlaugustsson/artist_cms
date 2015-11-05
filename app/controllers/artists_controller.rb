@@ -3,6 +3,8 @@ class ArtistsController < ApplicationController
   before_action :redirect_if_logged_in_artist , :only => [:new]
   before_action :set_logged_in_artist , :except => [:new , :create]
   before_action :remove_logged_in_music_company
+  before_action :auth_owner_of_artist_or_deny_action , :only => [:edit,:update,:delete,:destroy]
+
   layout "standard"
   def new
     @artist = Artist.new
@@ -87,6 +89,14 @@ end
     end
 end
 
+
+def auth_owner_of_artist_or_deny_action
+
+    if @onlineArtist.id.to_s != params[:id]
+      deny_user_action(@onlineArtist)
+
+    end
+end
 
 
 

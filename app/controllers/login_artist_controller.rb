@@ -14,6 +14,7 @@ class LoginArtistController < ApplicationController
   		found_user = Artist.where("email" => params[:email]).first
 
   	if found_user
+      puts found_user.email
   		auth_user = found_user.authenticate(params[:password])
   	end	
 

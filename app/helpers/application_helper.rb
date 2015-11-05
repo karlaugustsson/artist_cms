@@ -5,7 +5,8 @@ module ApplicationHelper
 	end
 
 	def statusbox(object)
-		if object == 1
+	
+		if object == 1 || object == true
 
 			return  "box true"
 		elsif object == nil

@@ -1,6 +1,10 @@
 class AlbumTracksController < ApplicationController
   layout 'standard'
   before_action :get_track_dependencies
+  before_action :set_logged_in_artist 
+  before_action :redirect_if_not_logged_in_artist
+  before_action :auth_owner_of_resource_or_deny_changes , :only => [:new,:create,:edit,:update, :delete , :destroy]
+  before_action :auth_owner_of_track_or_deny_changes , :only => [:edit,:update, :delete , :destroy]
 
   def new
     
@@ -15,6 +19,7 @@ class AlbumTracksController < ApplicationController
       message("you succesfully created a a new track","succes")
       redirect_to([@artist,@group,@album,@track])
     else
+      @track_length = Album.find(@album).album_tracks.count + 1
       render('new')
     end
   end
@@ -24,12 +29,13 @@ class AlbumTracksController < ApplicationController
   end
 
   def show
-    @track = AlbumTrack.find(params[:id])
+    @track = @group.albums.find(@album.id).album_tracks.find(params[:id])
+ 
   end
 
   def edit
     @track = AlbumTrack.find(params[:id])
-    @track_length = Album.find(@album).album_tracks.count
+    @track_length = Album.find(@album.id).album_tracks.count
 
   end
 
@@ -63,7 +69,16 @@ class AlbumTracksController < ApplicationController
     @group = MusicGroup.find(params[:music_group_id])
     @album = Album.find(params[:album_id])
   end
+
   def track_params
     params.require(:album_track).permit(:name,:position,:music_file,:album_id)
   end
+
+  def auth_owner_of_track_or_deny_changes
+    @thistrack = @onlineArtist.music_groups.where(:id => params[:music_group_id]).first.albums.where(:id => params[:album_id]).first.album_tracks.where(:id => params[:id]).first
+    if @thistrack == nil
+      deny_user_action(@onlineArtist)
+
+    end
+end
 end

@@ -1,10 +1,10 @@
 require "mp3info"
 class AlbumTrack < ActiveRecord::Base
-	acts_as_list
+	acts_as_list  :scope => :album
 	belongs_to :album
 	has_and_belongs_to_many :featured_artists , :class_name => "MusicGroup"
 	
-	scope :search , lambda { |search| where("name LIKE ?", "%#{search}%") }
+	scope :search , lambda { |search| where("album_tracks.name LIKE ?", "%#{search}%") }
 	scope :position_asc , lambda{ order("album_tracks.position ASC")}
 
 	has_attached_file :music_file

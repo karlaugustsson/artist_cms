@@ -1,10 +1,9 @@
 <% @page_title = "My page" %>
-	
 	<table class="table zebra-striped table-condensed table-hover">
 		<th>Email</th>
 		<th>Actions</th>
 		<tr>
-			<td><p>@artist.email</p></td>
+			<td><p><%= @artist.email %> </p></td>
 			<td><%= link_to("show all my music groups" , artist_music_groups_path(@artist))%></td>
 		</tr>
 	</table>

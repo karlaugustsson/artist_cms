@@ -1,8 +1,8 @@
 <% @page_title = "Delete music company account" %>
 
 <%= form_for(:music_company, :url => music_company_path(@company) , :html => {:method => :delete})  do |f| %>
-
+<div class="form-group"></div>
 <p>you are about to delete your account:<%= @company.email%></p>
 
-<%= submit_tag("delete music Company account") %>
+<%= submit_tag("delete music Company account" , :class => "btn-danger btn-lg") %>
 <% end %>	

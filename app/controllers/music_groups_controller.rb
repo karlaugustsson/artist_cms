@@ -1,6 +1,11 @@
 class MusicGroupsController < ApplicationController
   layout 'standard'
   before_action :get_current_artist
+    before_action :redirect_if_not_logged_in_artist
+  before_action :set_logged_in_artist 
+  before_action :auth_owner_of_resource_or_deny_changes , :only => [:new,:create,:edit,:update]
+  before_action :auth_owner_of_music_group_or_deny_changes ,  :only => [:edit,:update,:delete,:destroy]
+  
   def new
     @group = MusicGroup.new
   end
@@ -60,4 +65,13 @@ class MusicGroupsController < ApplicationController
   def group_params
     params.require(:music_group).permit(:name,:solo_work,:formation_date,:tag_name,:artist_id,:album_id)
   end
+
+  def auth_owner_of_music_group_or_deny_changes
+    @thisGroup = @onlineArtist.music_groups.where(:id => params[:id]).first
+    if @thisGroup == nil
+      deny_user_action(@onlineArtist)
+
+    end
+  end
+
 end

@@ -1,5 +1,6 @@
 class LoginMusicCompaniesController < ApplicationController
 	layout 'standard'
+
 	def login
 	end
   def logout
