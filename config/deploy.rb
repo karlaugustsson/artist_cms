@@ -1,6 +1,6 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
-
+set :bundle_flags, "--quiet"
 set :application, 'artist_cms'
 set :repo_url, 'git@github.com:karlaugustsson/artist_cms.git'
 set :passenger_restart_with_touch , true

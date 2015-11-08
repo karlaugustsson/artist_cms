@@ -48,7 +48,7 @@ group :development, :test do
 
   gem 'date_validator'
 
-  gem "paperclip", "~> 4.3"
+  gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
   gem 'acts_as_list'
 
