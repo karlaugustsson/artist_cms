@@ -53,6 +53,18 @@ group :development, :test do
   gem 'acts_as_list'
 
   gem 'ruby-mp3info', :require => 'mp3info'
+
+group :development do
+gem 'capistrano', '~> 3.4.0'
+gem 'capistrano-bundler', '~> 1.1.3'
+gem 'capistrano-rails', '~> 1.1.1'
+ 
+# Add this if you're using rbenv
+gem 'capistrano-rbenv', github: "capistrano/rbenv"
+end
+
+
+
 end
 
 
