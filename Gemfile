@@ -60,7 +60,7 @@ gem 'capistrano-bundler', '~> 1.1.3'
 gem 'capistrano-rails', '~> 1.1.1'
  
 # Add this if you're using rbenv
-gem 'capistrano-rbenv', github: "capistrano/rbenv"
+gem 'capistrano-rbenv', '~> 2.0'
 end
 
 
