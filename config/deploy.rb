@@ -34,7 +34,7 @@ set :repo_url, 'git@github.com:karlaugustsson/artist_cms.git'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :linked_files, %w{config/database.yml secrets.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 
