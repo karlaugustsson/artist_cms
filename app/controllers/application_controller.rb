@@ -192,7 +192,7 @@ end
   		@subject = @onlineArtist
   	when "music group"
   		@test = MusicGroup.where(:id => value[0]).first
-  		@@subject = @onlineArtist.music_groups.where(:id => value[0]).first
+  		@subject = @onlineArtist.music_groups.where(:id => value[0]).first
   	when "album"
   		@test = Album.where(:id => value[1]).first
   		@subject= @onlineArtist.music_groups.where(:id => value[0]).first.albums.where(:id => value[1]).first
