@@ -66,7 +66,3 @@ gem 'capistrano-passenger'
 end
 
 
-
-end
-
-
