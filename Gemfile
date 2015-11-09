@@ -45,9 +45,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
   gem 'rmagick' , '~> 2.15.4'
 
   gem 'carrierwave'
-
-
-
+ 
+	gem 'paperclip'
   gem 'date_validator'
  
 
