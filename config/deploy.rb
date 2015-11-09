@@ -1,3 +1,4 @@
+
 # config valid only for current version of Capistrano
 lock '3.4.0'
 set :application, 'artist_cms'
@@ -47,9 +48,9 @@ namespace :deploy do
       # end
     end
   end
-    desc "reload the database with seed data"
+  desc "reload the database with seed data"
   task :seed do
-    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=production"
+    run "cd #{release_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
   end
 
 end
