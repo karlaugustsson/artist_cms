@@ -1,6 +1,8 @@
 	<%=link_to("back to group" , artist_music_group_path(@artist,@owner))%>
 	<br>
 	<br>
+<%= @onlineArtist.id %>
+<%= @owner.id %>
 <% if @onlineArtist.id == @owner.id %>
 <%= link_to("new music group album" , new_artist_music_group_album_path(@artist,@owner) , :class => "btn-primary btn-lg" , :role => "button")%>
 <br>
