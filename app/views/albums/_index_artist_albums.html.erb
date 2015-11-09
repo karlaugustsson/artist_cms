@@ -1,9 +1,8 @@
 	<%=link_to("back to group" , artist_music_group_path(@artist,@owner))%>
 	<br>
 	<br>
-<%= @onlineArtist.id %>
-<%= @owner.id %>
-<% if @onlineArtist.id == @owner.id %>
+
+<% if @onlineArtist.id == @artist.id %>
 <%= link_to("new music group album" , new_artist_music_group_album_path(@artist,@owner) , :class => "btn-primary btn-lg" , :role => "button")%>
 <br>
 <br>
@@ -35,7 +34,7 @@
 	<td><p><%= album.release_date.strftime("%F") %></p></td>
 	<td><div class="<%= statusbox(album.published)%>"></div></td>
 	<td><div class="<%= statusbox(album.accepted_by_label)%>"></div></td>
-	<% if @onlineArtist.id == @owner.id %>	
+	<% if @onlineArtist.id == @artist.id %>	
 		
 		<td>
 

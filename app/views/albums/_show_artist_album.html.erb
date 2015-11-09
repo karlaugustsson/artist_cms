@@ -3,7 +3,7 @@
 <br>
 <br>
 
-<% if @onlineArtist.id == @owner.id %>
+<% if @onlineArtist.id == @artist.id %>
 
 	<%= link_to("Add new track" , new_artist_music_group_album_album_track_path(@artist,@owner,@album) ,  :class => "btn-primary btn-lg")%>
 	<br>
@@ -35,7 +35,7 @@
 		<th>Length</th>
 		<th>Play</th>
 		
-		<% if @onlineArtist.id == @owner.id %>
+		<% if @onlineArtist.id == @artist.id %>
 			
 			<th>Actions</th>
 
@@ -53,7 +53,7 @@
 			<button  name="playButtons" onclick="play(<%= @counter += 1 %>)" id="<%= @counter %>"><span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span></button>
 		</td>
 		
-		<% if @onlineArtist.id == @owner.id %>
+		<% if @onlineArtist.id == @artist.id %>
 		<td>
 		<%= link_to("edit track" , edit_artist_music_group_album_album_track_path(@artist,@owner,@album,track) , :class=> "btn-primary btn-xs")%>
 
