@@ -47,8 +47,7 @@ group :development, :test do
   gem 'rmagick' , '~> 2.15.4'
 
   gem 'date_validator'
-
-
+ 
 
   gem 'acts_as_list'
 

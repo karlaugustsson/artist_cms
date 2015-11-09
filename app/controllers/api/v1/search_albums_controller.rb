@@ -1,4 +1,3 @@
-require 'paperclip'
 class API::V1::SearchAlbumsController < ApplicationController
 
   def index
