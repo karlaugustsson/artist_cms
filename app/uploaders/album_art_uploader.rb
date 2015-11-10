@@ -11,7 +11,7 @@ def cache!(new_file)
     @old_tmp_file.try :delete
   end
   # Include RMagick or MiniMagick support:
-  include CarrierWave::RMagick
+  include CarrierWave::rmagick
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
