@@ -33,8 +33,8 @@ set :passenger_restart_with_touch , true
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :linked_files, %w{config/database.yml config/secrets.yml}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{config/database.yml config/secrets.yml config/environments/production.rb}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 
 
 namespace :deploy do
