@@ -5,7 +5,7 @@ class API::V1::SearchAlbumsController < ApplicationController
       @album = Album.where(:id => params[:id])
     elsif params[:latest_release]
       
-      @album = Album.all().accepted_by_label.published.release_date_asc.limit(1)
+      @album = Album.all().accepted_by_label.published.release_date_asc.limit(5)
       @album.each do |album|
         
         album.full_path_album_art = "http://" +request.host_with_port + album.album_art.url
