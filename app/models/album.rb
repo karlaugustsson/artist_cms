@@ -13,6 +13,7 @@ class Album < ActiveRecord::Base
 
   scope :search , lambda { |search| where("albums.name LIKE ?", "%#{search}%") }
   scope :published , lambda { where("albums.published = 1") }
+  
   scope :release_date_asc , lambda { order("albums.release_date ASC") }
     scope :release_date_desc , lambda { order("albums.release_date DESC") }
   scope :accepted_by_label , lambda { where("albums.accepted_by_label = 1") }
