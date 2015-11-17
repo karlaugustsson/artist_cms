@@ -10,6 +10,8 @@ config/database.yml
 /db/*.sqlite3-journal
 /db/schema.rb
 /public/uploads
+
+/public/system/*
 /public/tmp
 /coverage/
 /spec/tmp
