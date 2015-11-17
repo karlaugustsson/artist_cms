@@ -9,7 +9,7 @@ class AlbumTrack < ActiveRecord::Base
 
 	attr_accessor  :oggpath
 
-	has_attached_file :music_file,:styles => { ogg: { format: 'ogv' } }, :processors => [:ffmpeg]
+	has_attached_file :music_file,:styles => { ogg: { format: 'ogg' } }, :processors => [:ffmpeg]
 	validates_presence_of :name  
 	validates_length_of :name ,{in: 1..50}
 	validates_attachment :music_file, presence: true,
