@@ -19,13 +19,14 @@
 		</tr>
 	</table>
 
-	<audio id="musicPlayer">
+	<audio id="musicPlayer" controls>
 		Your browser does not support the audio element.
 	</audio>
 	<div class="play">
 		
 	<% @tracks.each do |track| %>
   <source name="playlist" src="<%= track.music_file.url%>" type="<%=track.music_file_content_type%>">
+    <source name="playlist2" src="<%= track.music_file.url(:ogg)%>" type="audio/ogg">
 <%end%>
 </div>
 	<table class="table zebra-striped table-condensed table-hover">

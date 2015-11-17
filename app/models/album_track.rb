@@ -7,11 +7,11 @@ class AlbumTrack < ActiveRecord::Base
 	scope :search , lambda { |search| where("album_tracks.name LIKE ?", "%#{search}%") }
 	scope :position_asc , lambda{ order("album_tracks.position ASC")}
 
-	has_attached_file :music_file
+	has_attached_file :music_file,:styles => { ogg: { format: 'ogg' } }, :processors => [:ffmpeg]
 	validates_presence_of :name  
 	validates_length_of :name ,{in: 1..50}
 	validates_attachment :music_file, presence: true,
-  		content_type: { content_type: ["audio/mp3", "audio/wav", "audio/wma"] },
+  		content_type: { content_type: ["audio/mp3"] },
   		size: { in: 1..15.megabytes }
   		before_save :get_song_length
 def get_song_length

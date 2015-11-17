@@ -53,6 +53,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
   gem 'acts_as_list'
 
   gem 'ruby-mp3info', :require => 'mp3info'
+  gem 'paperclip-av-transcoder'
+gem 'aws-sdk'
+gem "paperclip-ffmpeg", "~> 1.2.0"
 
 group :development do
 gem 'capistrano', '~> 3.4.0'

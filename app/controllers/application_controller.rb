@@ -30,8 +30,11 @@ class ApplicationController < ActionController::Base
 	end
 
 		def redirect_if_logged_in_artist
-	   		if session[:artist]
+	   		if session[:artist] && Artist.where(:id => session[:artist]).first != nil
 	   			redirect_to(artist_path(session[:artist]))
+	   		else
+
+	   			session[:artist] = nil
 	   		end	
 	   			
 	end

@@ -1,7 +1,7 @@
 <% @page_title = "My music track" %>
 <%= link_to("back to album" , artist_music_group_album_path(@artist,@group,@album))%>
 
-<audio id="musicPlayer">
+<audio id="musicPlayer" controls>
   <source src="<%= @track.music_file.url%>" type="<%=@track.music_file_content_type%>">
 
 Your browser does not support the audio element.
@@ -10,7 +10,8 @@ Your browser does not support the audio element.
 	<div class="play">
 		
 
-  <source name="playlist" src="<%= @track.music_file.url%>" type="<%=@track.music_file_content_type%>">
+  <source name="playlist" src="<%= @track.music_file.url%>" type="<%=@track.music_file_content_type%>" >
+  <source name="playlist2" src="<%= @track.music_file.url(:ogg)%>" type="audio/ogg" >
 
 </div>
 

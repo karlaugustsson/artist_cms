@@ -2,6 +2,7 @@ function play(id){
 	var audio = document.getElementById("musicPlayer")
 	audio.innerHTML = ""
 	var musicList = document.getElementsByName("playlist");
+	var musicList2 = document.getElementsByName("playlist2")
 	var buttons = document.getElementsByName("playButtons")
 	for (var i = buttons.length -1; i >= 0; i--) {
 		buttons[i].innerHTML = '<span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span>'
@@ -9,9 +10,14 @@ function play(id){
 	var thisbutton = document.getElementById(id)
 		thisbutton.innerHTML = '<span class="glyphicon glyphicon-pause" id="playIcon" aria-hidden="true"></span>'
 	var track = musicList[id]
+
+	var track2 = musicList2[id]
 	track.src += new Date().getSeconds()
+	track2.src += new Date().getSeconds()
 	var cln = track.cloneNode(true);
+	var cln2 = track2.cloneNode(true);
 	audio.appendChild(cln)
+	audio.appendChild(cln2)
 	audio.load()
 	audio.play()
 	
