@@ -26,7 +26,7 @@ class API::V1::SearchAlbumsController < ApplicationController
         album.full_path_album_art = "http://" +request.host_with_port + album.album_art.url
      
     	  album.album_tracks.each do |t|
-
+          t.oggpath = "http://" + request.host_with_port + t.music_file.url(:ogg)
     		  t.music_file_file_name =  URI.join(request.url, t.music_file.url)
 
     	 end

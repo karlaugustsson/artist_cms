@@ -148,14 +148,14 @@ end
 
 def render_search_result_to_json(tracks)
 
- render :json => tracks ,:only => [:position,:name ,:track_length, :music_file_file_name, :music_file_content_type , :id], :include =>
+ render :json => tracks ,:only => [:position,:name ,:track_length, :music_file_file_name, :music_file_content_type ,:id], :methods => [:oggpath], :include =>
  		{:album =>
  			{:only => [:id,:name,:release_date],:include =>
  		 		{:labels => {},:music_groups =>
  		 			{:only => [:id,:name]
 
  		 			}
- 		 		}, :methods => [:full_path_album_art]
+ 		 		}, :methods => [:full_path_album_art,:oggpath]
  		 	}
  		}
 

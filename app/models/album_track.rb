@@ -7,6 +7,8 @@ class AlbumTrack < ActiveRecord::Base
 	scope :search , lambda { |search| where("album_tracks.name LIKE ?", "%#{search}%") }
 	scope :position_asc , lambda{ order("album_tracks.position ASC")}
 
+	attr_accessor  :oggpath
+
 	has_attached_file :music_file,:styles => { ogg: { format: 'ogv' } }, :processors => [:ffmpeg]
 	validates_presence_of :name  
 	validates_length_of :name ,{in: 1..50}
@@ -14,6 +16,7 @@ class AlbumTrack < ActiveRecord::Base
   		content_type: { content_type: ["audio/mp3" , "audio/mpeg"] },
   		size: { in: 1..15.megabytes }
   		before_save :get_song_length
+
 def get_song_length
 	
 	if File.exist?(music_file.path)
@@ -31,4 +34,5 @@ def get_song_length
   	
 	end
 end
+
 end

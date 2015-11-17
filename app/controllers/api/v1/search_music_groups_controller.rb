@@ -26,7 +26,7 @@ class API::V1::SearchMusicGroupsController < ApplicationController
           
           album.album_tracks.each do |track|
 
-          
+            track.oggpath = "http://" + request.host_with_port + track.music_file.url(:ogg)
             track.music_file_file_name = URI.join(request.url, track.music_file.url)
             
             @tracks.push(track)
